@@ -15,6 +15,8 @@
 		094913202BD988E000D6D9CE /* DatMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949131F2BD988E000D6D9CE /* DatMemoTests.swift */; };
 		0949132A2BD988E000D6D9CE /* DatMemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913292BD988E000D6D9CE /* DatMemoUITests.swift */; };
 		0949132C2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949132B2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift */; };
+		094913392BD98EDB00D6D9CE /* log in Resources */ = {isa = PBXBuildFile; fileRef = 094913382BD98EDB00D6D9CE /* log */; };
+		0949133B2BDA53FC00D6D9CE /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		094913252BD988E000D6D9CE /* DatMemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatMemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		094913292BD988E000D6D9CE /* DatMemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatMemoUITests.swift; sourceTree = "<group>"; };
 		0949132B2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatMemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		094913382BD98EDB00D6D9CE /* log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log; sourceTree = "<group>"; };
+		0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */,
+				094913382BD98EDB00D6D9CE /* log */,
 				0949130E2BD988DD00D6D9CE /* ContentView.swift */,
+				0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */,
 				094913102BD988DD00D6D9CE /* Item.swift */,
 				094913122BD988E000D6D9CE /* Assets.xcassets */,
 				094913142BD988E000D6D9CE /* Preview Content */,
@@ -234,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094913392BD98EDB00D6D9CE /* log in Resources */,
 				094913162BD988E000D6D9CE /* Preview Assets.xcassets in Resources */,
 				094913132BD988E000D6D9CE /* Assets.xcassets in Resources */,
 			);
@@ -260,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0949133B2BDA53FC00D6D9CE /* SplashScreen.swift in Sources */,
 				0949130F2BD988DD00D6D9CE /* ContentView.swift in Sources */,
 				094913112BD988DD00D6D9CE /* Item.swift in Sources */,
 				0949130D2BD988DD00D6D9CE /* DatMemoApp.swift in Sources */,
