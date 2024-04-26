@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0949130D2BD988DD00D6D9CE /* DatMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */; };
-		0949130F2BD988DD00D6D9CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949130E2BD988DD00D6D9CE /* ContentView.swift */; };
-		094913112BD988DD00D6D9CE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913102BD988DD00D6D9CE /* Item.swift */; };
 		094913132BD988E000D6D9CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 094913122BD988E000D6D9CE /* Assets.xcassets */; };
 		094913162BD988E000D6D9CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 094913152BD988E000D6D9CE /* Preview Assets.xcassets */; };
 		094913202BD988E000D6D9CE /* DatMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949131F2BD988E000D6D9CE /* DatMemoTests.swift */; };
 		0949132A2BD988E000D6D9CE /* DatMemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913292BD988E000D6D9CE /* DatMemoUITests.swift */; };
 		0949132C2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949132B2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift */; };
-		094913392BD98EDB00D6D9CE /* log in Resources */ = {isa = PBXBuildFile; fileRef = 094913382BD98EDB00D6D9CE /* log */; };
 		0949133B2BDA53FC00D6D9CE /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */; };
+		094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913432BDB8A0A00D6D9CE /* LoginView.swift */; };
+		094913472BDB96FA00D6D9CE /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 094913462BDB96FA00D6D9CE /* PressStart2P.ttf */; };
+		094913482BDB975200D6D9CE /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 094913462BDB96FA00D6D9CE /* PressStart2P.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +39,6 @@
 /* Begin PBXFileReference section */
 		094913092BD988DD00D6D9CE /* DatMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatMemoApp.swift; sourceTree = "<group>"; };
-		0949130E2BD988DD00D6D9CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		094913102BD988DD00D6D9CE /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		094913122BD988E000D6D9CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		094913152BD988E000D6D9CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0949131B2BD988E000D6D9CE /* DatMemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatMemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,8 +46,10 @@
 		094913252BD988E000D6D9CE /* DatMemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatMemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		094913292BD988E000D6D9CE /* DatMemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatMemoUITests.swift; sourceTree = "<group>"; };
 		0949132B2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatMemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		094913382BD98EDB00D6D9CE /* log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log; sourceTree = "<group>"; };
 		0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		094913402BDA569300D6D9CE /* LogApril.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LogApril.md; sourceTree = "<group>"; };
+		094913432BDB8A0A00D6D9CE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		094913462BDB96FA00D6D9CE /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = PressStart2P.ttf; path = ../../../../../Downloads/press_start_2p/PressStart2P.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,11 +100,11 @@
 		0949130B2BD988DD00D6D9CE /* DatMemo */ = {
 			isa = PBXGroup;
 			children = (
-				0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */,
-				094913382BD98EDB00D6D9CE /* log */,
-				0949130E2BD988DD00D6D9CE /* ContentView.swift */,
-				0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */,
-				094913102BD988DD00D6D9CE /* Item.swift */,
+				094913452BDB969C00D6D9CE /* Fonts */,
+				0949133E2BDA564F00D6D9CE /* Logic */,
+				0949133F2BDA565900D6D9CE /* LogFiles */,
+				0949133D2BDA564000D6D9CE /* MainView */,
+				0949133C2BDA562500D6D9CE /* SplashScreen&LoadingScreen */,
 				094913122BD988E000D6D9CE /* Assets.xcassets */,
 				094913142BD988E000D6D9CE /* Preview Content */,
 			);
@@ -134,6 +134,46 @@
 				0949132B2BD988E000D6D9CE /* DatMemoUITestsLaunchTests.swift */,
 			);
 			path = DatMemoUITests;
+			sourceTree = "<group>";
+		};
+		0949133C2BDA562500D6D9CE /* SplashScreen&LoadingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0949133A2BDA53FC00D6D9CE /* SplashScreen.swift */,
+			);
+			path = "SplashScreen&LoadingScreen";
+			sourceTree = "<group>";
+		};
+		0949133D2BDA564000D6D9CE /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				094913432BDB8A0A00D6D9CE /* LoginView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		0949133E2BDA564F00D6D9CE /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		0949133F2BDA565900D6D9CE /* LogFiles */ = {
+			isa = PBXGroup;
+			children = (
+				094913402BDA569300D6D9CE /* LogApril.md */,
+			);
+			path = LogFiles;
+			sourceTree = "<group>";
+		};
+		094913452BDB969C00D6D9CE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				094913462BDB96FA00D6D9CE /* PressStart2P.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				094913392BD98EDB00D6D9CE /* log in Resources */,
+				094913472BDB96FA00D6D9CE /* PressStart2P.ttf in Resources */,
 				094913162BD988E000D6D9CE /* Preview Assets.xcassets in Resources */,
 				094913132BD988E000D6D9CE /* Assets.xcassets in Resources */,
 			);
@@ -250,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094913482BDB975200D6D9CE /* PressStart2P.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,9 +308,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */,
 				0949133B2BDA53FC00D6D9CE /* SplashScreen.swift in Sources */,
-				0949130F2BD988DD00D6D9CE /* ContentView.swift in Sources */,
-				094913112BD988DD00D6D9CE /* Item.swift in Sources */,
 				0949130D2BD988DD00D6D9CE /* DatMemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,11 +477,12 @@
 				DEVELOPMENT_TEAM = 7ZPN55QD5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DatMemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,11 +507,12 @@
 				DEVELOPMENT_TEAM = 7ZPN55QD5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DatMemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

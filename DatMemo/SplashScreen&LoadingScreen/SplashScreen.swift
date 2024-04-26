@@ -11,7 +11,7 @@ struct SplashScreen: View{
         ZStack {
             
             if self.isActive {
-                ContentView()
+                LoginView()
             }
             else {
                 background
