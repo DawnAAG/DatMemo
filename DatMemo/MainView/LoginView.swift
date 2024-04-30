@@ -39,7 +39,7 @@ struct LoginView: View {
                     }
                     .padding(.bottom,scaledPadding)
                     .padding(.horizontal, scaledPadding)
-                    HStack{
+                    HStack(alignment: .center){
                         Button {
                             print("Edit button was tapped")
                         } label: {
@@ -50,7 +50,6 @@ struct LoginView: View {
                         Button {
                             print("Edit button was tapped")
                         } label: {
-                            Text("")
                             Image("ChooseButtonCats")
                                 .resizable()
                         }
@@ -60,11 +59,11 @@ struct LoginView: View {
                     .padding(.horizontal,scaledPadding)
                     
                     VStack{
-                            Image("NameFormButton")
+                            Image("YourChoosingButton")
                                 .resizable()
                                 .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
                                 .padding(.top, scaledframeDefaultSizeOne*27)
-                            Image("NameFormButton")
+                            Image("PartnersChoosingButton")
                                 .resizable()
                                 .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
                                 .padding(.top, scaledframeDefaultSizeOne*63)

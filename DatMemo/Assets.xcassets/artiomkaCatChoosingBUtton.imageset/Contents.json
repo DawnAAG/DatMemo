@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "ChooseButtonCats.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CatChoosingButton.png",
+      "filename" : "artiomkaCatButton.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

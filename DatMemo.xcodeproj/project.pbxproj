@@ -17,6 +17,7 @@
 		094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913432BDB8A0A00D6D9CE /* LoginView.swift */; };
 		094913472BDB96FA00D6D9CE /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 094913462BDB96FA00D6D9CE /* PressStart2P.ttf */; };
 		094913482BDB975200D6D9CE /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 094913462BDB96FA00D6D9CE /* PressStart2P.ttf */; };
+		094913552BE0EDC700D6D9CE /* CatChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094913542BE0EDC700D6D9CE /* CatChoosingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		094913402BDA569300D6D9CE /* LogApril.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LogApril.md; sourceTree = "<group>"; };
 		094913432BDB8A0A00D6D9CE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		094913462BDB96FA00D6D9CE /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = PressStart2P.ttf; path = ../../../../../Downloads/press_start_2p/PressStart2P.ttf; sourceTree = "<group>"; };
+		094913542BE0EDC700D6D9CE /* CatChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatChoosingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				094913432BDB8A0A00D6D9CE /* LoginView.swift */,
+				094913542BE0EDC700D6D9CE /* CatChoosingView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */,
+				094913552BE0EDC700D6D9CE /* CatChoosingView.swift in Sources */,
 				0949133B2BDA53FC00D6D9CE /* SplashScreen.swift in Sources */,
 				0949130D2BD988DD00D6D9CE /* DatMemoApp.swift in Sources */,
 			);
