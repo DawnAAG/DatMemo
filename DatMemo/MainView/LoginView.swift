@@ -8,8 +8,10 @@
 import SwiftUI
 extension Color {
     static let browney = Color(red: 79 / 255, green: 60 / 255, blue:66 / 255)
+    static let brownnr2 = Color(red: 65 / 255, green: 56 / 255, blue: 57 / 255)
 }
 struct LoginView: View {
+    @State var username: String = ""
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 160
@@ -59,16 +61,34 @@ struct LoginView: View {
                     .padding(.horizontal,scaledPadding)
                     
                     VStack{
+                        ZStack {
                             Image("YourChoosingButton")
-                                .resizable()
-                                .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
-                                .padding(.top, scaledframeDefaultSizeOne*27)
+                                    .resizable()
+                                    .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                            TextField(text: $username, prompt: Text("Name")) {
+                                   Text("Username")
+                               }
+                                .font(Font.custom("PressStart2P", fixedSize: 20))
+                                .foregroundStyle(Color.brownnr2)
+                                .padding(.leading, scaledframeDefaultSizeOne * 96)
+                                .padding(.top, 53)
+                        }
+                        .padding(.top, 27)
+                        ZStack {
                             Image("PartnersChoosingButton")
-                                .resizable()
-                                .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
-                                .padding(.top, scaledframeDefaultSizeOne*63)
+                                    .resizable()
+                                    .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                            TextField(text: $username, prompt: Text("Name")) {
+                                   Text("Username")
+                               }
+                            .font(Font.custom("PressStart2P", fixedSize: 20))
+                            .foregroundStyle(Color.brownnr2)
+                            .padding(.leading, scaledframeDefaultSizeOne * 96)
+                            .padding(.top, 53)
+                        }
+                        .padding(.top, scaledframeDefaultSizeOne*63)
                         Button {
-                            print("Edit button was tapped")
+                            print($username)
                         } label: {
                             Image("SetButton")
                                 .resizable()
