@@ -12,6 +12,7 @@ extension Color {
 }
 struct LoginView: View {
     @State var username: String = ""
+    @State var partnersname: String = ""
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 160
@@ -78,7 +79,7 @@ struct LoginView: View {
                             Image("PartnersChoosingButton")
                                     .resizable()
                                     .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
-                            TextField(text: $username, prompt: Text("Name")) {
+                            TextField(text: $partnersname, prompt: Text("Name")) {
                                    Text("Username")
                                }
                             .font(Font.custom("PressStart2P", fixedSize: 20))
