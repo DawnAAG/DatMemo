@@ -21,83 +21,85 @@ struct LoginView: View {
     @ScaledMetric(relativeTo: .body) var scaledframeButtonWidth: CGFloat = 250
     @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
     var body: some View {
-        ZStack{
-            background
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-            ZStack {
-                VStack(alignment: .center) {
-                    HStack{
-                        Text("Choose your cat")
-                            .font(Font.custom("PressStart2P", fixedSize: 15))
-                            .foregroundStyle(Color.white)
-                            .multilineTextAlignment(.center)
-                            .frame(width:scaledframewidth, height: scaledframeheight)
-                        Text("Choose your partner's cat")
-                            .font(Font.custom("PressStart2P", fixedSize: 15))
-                            .foregroundStyle(Color.white)
-                            .multilineTextAlignment(.center)
-                            .frame(width:scaledframewidth, height: scaledframeheight)
-                    }
-                    .padding(.bottom,scaledPadding)
-                    .padding(.horizontal, scaledPadding)
-                    HStack(alignment: .center){
-                        Button {
-                            print("Edit button was tapped")
-                        } label: {
-                            Image("ChooseButtonCats")
-                                .resizable()
+        NavigationStack{
+            ZStack{
+                background
+                    .resizable()
+                    .ignoresSafeArea()
+                    .scaledToFill()
+                ZStack {
+                    VStack(alignment: .center) {
+                        HStack{
+                            Text("Choose your cat")
+                                .font(Font.custom("PressStart2P", fixedSize: 15))
+                                .foregroundStyle(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width:scaledframewidth, height: scaledframeheight)
+                            Text("Choose your partner's cat")
+                                .font(Font.custom("PressStart2P", fixedSize: 15))
+                                .foregroundStyle(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width:scaledframewidth, height: scaledframeheight)
                         }
-                        .frame(width: scaledframewidth, height: scaledframewidth)
-                        Button {
-                            print("Edit button was tapped")
-                        } label: {
-                            Image("ChooseButtonCats")
-                                .resizable()
-                        }
-                        .frame(width: scaledframewidth, height: scaledframewidth)
-
-                    }
-                    .padding(.horizontal,scaledPadding)
-                    
-                    VStack{
-                        ZStack {
-                            Image("YourChoosingButton")
+                        .padding(.bottom,scaledPadding)
+                        .padding(.horizontal, scaledPadding)
+                        HStack(alignment: .center){
+                            Button {
+                                print("Edit button was tapped")
+                            } label: {
+                                Image("ChooseButtonCats")
                                     .resizable()
-                                    .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
-                            TextField(text: $username, prompt: Text("Name")) {
-                                   Text("Username")
-                               }
+                            }
+                            .frame(width: scaledframewidth, height: scaledframewidth)
+                            Button {
+                                print("Edit button was tapped")
+                            } label: {
+                                Image("ChooseButtonCats")
+                                    .resizable()
+                            }
+                            .frame(width: scaledframewidth, height: scaledframewidth)
+
+                        }
+                        .padding(.horizontal,scaledPadding)
+                        
+                        VStack{
+                            ZStack {
+                                Image("YourChoosingButton")
+                                        .resizable()
+                                        .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                                TextField(text: $username, prompt: Text("Name")) {
+                                       Text("Username")
+                                   }
+                                    .font(Font.custom("PressStart2P", fixedSize: 20))
+                                    .foregroundStyle(Color.brownnr2)
+                                    .padding(.leading, scaledframeDefaultSizeOne * 96)
+                                    .padding(.top, 53)
+                            }
+                            .padding(.top, 27)
+                            ZStack {
+                                Image("PartnersChoosingButton")
+                                        .resizable()
+                                        .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                                TextField(text: $partnersname, prompt: Text("Name")) {
+                                       Text("Username")
+                                   }
                                 .font(Font.custom("PressStart2P", fixedSize: 20))
                                 .foregroundStyle(Color.brownnr2)
                                 .padding(.leading, scaledframeDefaultSizeOne * 96)
                                 .padding(.top, 53)
-                        }
-                        .padding(.top, 27)
-                        ZStack {
-                            Image("PartnersChoosingButton")
+                            }
+                            .padding(.top, scaledframeDefaultSizeOne*63)
+                            Button {
+                                print($username)
+                            } label: {
+                                Image("SetButton")
                                     .resizable()
-                                    .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
-                            TextField(text: $partnersname, prompt: Text("Name")) {
-                                   Text("Username")
-                               }
-                            .font(Font.custom("PressStart2P", fixedSize: 20))
-                            .foregroundStyle(Color.brownnr2)
-                            .padding(.leading, scaledframeDefaultSizeOne * 96)
-                            .padding(.top, 53)
+                            }
+                            .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
+                            .padding(.top, scaledframeDefaultSizeOne*63)
                         }
-                        .padding(.top, scaledframeDefaultSizeOne*63)
-                        Button {
-                            print($username)
-                        } label: {
-                            Image("SetButton")
-                                .resizable()
-                        }
-                        .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
-                        .padding(.top, scaledframeDefaultSizeOne*63)
-                    }
 
+                    }
                 }
             }
         }
