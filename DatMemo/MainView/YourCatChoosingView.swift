@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CatChoosingView: View {
+struct YourCatChoosingView: View {
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 165
@@ -85,5 +85,6 @@ struct CatChoosingView: View {
     }
 
 #Preview {
-    CatChoosingView()
+    YourCatChoosingView()
 }
+

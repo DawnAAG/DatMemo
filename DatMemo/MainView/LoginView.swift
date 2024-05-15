@@ -43,14 +43,14 @@ struct LoginView: View {
                         .padding(.horizontal, scaledPadding)
                         HStack(alignment: .center){
                             NavigationLink {
-                                            CatChoosingView()
+                                            YourCatChoosingView()
                                         } label: {
                                                 Image("ChooseButtonCats")
                                                     .resizable()
                                         }
                                         .frame(width: scaledframewidth, height: scaledframewidth)
                             NavigationLink {
-                                            CatChoosingView()
+                                            PartnersCatChoosingView()
                                         } label: {
                                                 Image("ChooseButtonCats")
                                                     .resizable()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CatChoosingView: View {
+struct PartnersCatChoosingView: View {
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 165
@@ -20,14 +20,8 @@ struct CatChoosingView: View {
     @State private var catNumber: Int8 = 0
     @State private var chosenCat: Int8 = 0
     
+    
     var body: some View {
-        
-        switch catNumber{
-        case 1:
-            Text("Hello")
-        default:
-            Text("No cat chosen")
-        }
         ZStack{
             background
                 .resizable()
@@ -56,7 +50,9 @@ struct CatChoosingView: View {
                         }))
                 VStack(alignment:.center){
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is ArtiomkaCat")
+                        chosenCat = 1
+                        print(chosenCat)
                     } label: {
                         Image("artiomkaCatChoosingButton")
                             .resizable()
@@ -64,7 +60,9 @@ struct CatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is SashenkaCat")
+                        chosenCat = 2
+                        print(chosenCat)
                     } label: {
                         Image("sashenkaCatChoosingButton")
                             .resizable()
@@ -72,7 +70,9 @@ struct CatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is DimaCat")
+                        chosenCat = 3
+                        print(chosenCat)
                     } label: {
                         Image("dimaCatChoosingButton")
                             .resizable()
@@ -84,6 +84,8 @@ struct CatChoosingView: View {
         }
     }
 
+
 #Preview {
-    CatChoosingView()
+    PartnersCatChoosingView()
 }
+
