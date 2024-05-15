@@ -15,6 +15,8 @@ struct CatChoosingView: View {
     @ScaledMetric(relativeTo: .body) var scaledframeButtonHeight: CGFloat = 100
     @ScaledMetric(relativeTo: .body) var scaledframeButtonWidth: CGFloat = 250
     @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         ZStack{
             background
@@ -22,6 +24,26 @@ struct CatChoosingView: View {
                 .ignoresSafeArea()
                 .scaledToFill()
             ZStack{
+                HStack(alignment: .top) {
+                    Text("")
+                                    .foregroundColor(Color.white)
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarItems(leading: Button(action : {
+                                        self.mode.wrappedValue.dismiss()
+                                    }){
+                                        Image(systemName: "arrow.left")
+                                            .foregroundColor(Color.white)
+                                })
+                }
+                        }
+                        .edgesIgnoringSafeArea(.top)
+                        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                        
+                            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                                self.mode.wrappedValue.dismiss()
+                            }
+                            
+                        }))
                 VStack(alignment:.center){
                     Button {
                         print("Edit button was tapped")
@@ -46,11 +68,11 @@ struct CatChoosingView: View {
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
+                    
                 }
             }
         }
     }
-}
 
 #Preview {
     CatChoosingView()

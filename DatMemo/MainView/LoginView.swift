@@ -21,7 +21,7 @@ struct LoginView: View {
     @ScaledMetric(relativeTo: .body) var scaledframeButtonWidth: CGFloat = 250
     @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
     var body: some View {
-        NavigationStack{
+        NavigationView{
             ZStack{
                 background
                     .resizable()
@@ -40,24 +40,25 @@ struct LoginView: View {
                                 .foregroundStyle(Color.white)
                                 .multilineTextAlignment(.center)
                                 .frame(width:scaledframewidth, height: scaledframeheight)
+                            
                         }
                         .padding(.bottom,scaledPadding)
                         .padding(.horizontal, scaledPadding)
                         HStack(alignment: .center){
-                            Button {
-                                print("Edit button was tapped")
-                            } label: {
-                                Image("ChooseButtonCats")
-                                    .resizable()
-                            }
-                            .frame(width: scaledframewidth, height: scaledframewidth)
-                            Button {
-                                print("Edit button was tapped")
-                            } label: {
-                                Image("ChooseButtonCats")
-                                    .resizable()
-                            }
-                            .frame(width: scaledframewidth, height: scaledframewidth)
+                            NavigationLink {
+                                            CatChoosingView()
+                                        } label: {
+                                                Image("ChooseButtonCats")
+                                                    .resizable()
+                                        }
+                                        .frame(width: scaledframewidth, height: scaledframewidth)
+                            NavigationLink {
+                                            CatChoosingView()
+                                        } label: {
+                                                Image("ChooseButtonCats")
+                                                    .resizable()
+                                        }
+                                        .frame(width: scaledframewidth, height: scaledframewidth)
 
                         }
                         .padding(.horizontal,scaledPadding)
@@ -105,6 +106,23 @@ struct LoginView: View {
         }
     }
 }
+
+
+//Button {
+//    print("Edit button was tapped")
+//    
+//} label: {
+//    Image("ChooseButtonCats")
+//        .resizable()
+//}
+//.frame(width: scaledframewidth, height: scaledframewidth)
+//Button {
+//    print("Edit button was tapped")
+//} label: {
+//    Image("ChooseButtonCats")
+//        .resizable()
+//}
+//.frame(width: scaledframewidth, height: scaledframewidth)
 
 enum Side: Equatable, Hashable {
     case left
