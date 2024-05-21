@@ -50,7 +50,7 @@ struct PartnersCatChoosingView: View {
                         }))
                 VStack(alignment:.center){
                     Button {
-                        print("Your cat is ArtiomkaCat")
+                        print("Your partners cat is ArtiomkaCat")
                         chosenCat = 1
                         print(chosenCat)
                     } label: {
@@ -60,7 +60,7 @@ struct PartnersCatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Your cat is SashenkaCat")
+                        print("Your partners cat is SashenkaCat")
                         chosenCat = 2
                         print(chosenCat)
                     } label: {
@@ -70,7 +70,7 @@ struct PartnersCatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Your cat is DimaCat")
+                        print("Your partners cat is DimaCat")
                         chosenCat = 3
                         print(chosenCat)
                     } label: {

@@ -22,9 +22,13 @@ struct YourCatChoosingView: View {
     
     var body: some View {
         
-        switch catNumber{
+        switch chosenCat{
         case 1:
-            Text("Hello")
+            Text("Chosen cat is 1")
+        case 2:
+            Text("Chosen cat is 2")
+        case 3:
+            Text("Chosen cat is 3")
         default:
             Text("No cat chosen")
         }
@@ -56,7 +60,9 @@ struct YourCatChoosingView: View {
                         }))
                 VStack(alignment:.center){
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is ArtiomkaCat")
+                        chosenCat = 1
+                        print(chosenCat)
                     } label: {
                         Image("artiomkaCatChoosingButton")
                             .resizable()
@@ -64,7 +70,9 @@ struct YourCatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is SashenkaCat")
+                        chosenCat = 2
+                        print(chosenCat)
                     } label: {
                         Image("sashenkaCatChoosingButton")
                             .resizable()
@@ -72,13 +80,14 @@ struct YourCatChoosingView: View {
                     .frame(width: scaledframewidth, height: scaledframewidth)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
-                        print("Edit button was tapped")
+                        print("Your cat is DimaCat")
+                        chosenCat = 3
+                        print(chosenCat)
                     } label: {
                         Image("dimaCatChoosingButton")
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
-                    
                 }
             }
         }

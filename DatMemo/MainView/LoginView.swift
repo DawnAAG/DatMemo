@@ -68,10 +68,11 @@ struct LoginView: View {
                                 TextField(text: $username, prompt: Text("Name")) {
                                        Text("Username")
                                    }
-                                    .font(Font.custom("PressStart2P", fixedSize: 20))
-                                    .foregroundStyle(Color.brownnr2)
-                                    .padding(.leading, scaledframeDefaultSizeOne * 96)
-                                    .padding(.top, 53)
+                                .frame(width:80, height: 20)
+                                .font(Font.custom("PressStart2P", fixedSize: 20))
+                                .foregroundStyle(Color.brownnr2)
+                                .padding(.leading,-100)
+                                .padding(.top, 53)
                             }
                             .padding(.top, 27)
                             ZStack {
@@ -81,9 +82,10 @@ struct LoginView: View {
                                 TextField(text: $partnersname, prompt: Text("Name")) {
                                        Text("Username")
                                    }
+                                .frame(width:80, height: 20)
                                 .font(Font.custom("PressStart2P", fixedSize: 20))
                                 .foregroundStyle(Color.brownnr2)
-                                .padding(.leading, scaledframeDefaultSizeOne * 96)
+                                .padding(.leading,-100)
                                 .padding(.top, 53)
                             }
                             .padding(.top, scaledframeDefaultSizeOne*63)
