@@ -30,11 +30,10 @@ struct MainPageView: View {
                     }
                     HStack(alignment: .center){
                         Text("Artiom")
-                            .multilineTextAlignment(.trailing)
                             .padding(sides: [.left], value: 10)
                             .font(Font.custom("PressStart2P", fixedSize: 8))
                             .foregroundStyle(Color.brownnr2)
-                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8)
+                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8, alignment: .trailing)
                         Image("heart")
                             .resizable()
                             .frame(width: scaledframeDefaultSizeOne * 64, height: scaledframeDefaultSizeOne * 59, alignment: .center)
@@ -43,7 +42,7 @@ struct MainPageView: View {
                             .padding(sides: [.right], value: 10)
                             .font(Font.custom("PressStart2P", fixedSize: 8))
                             .foregroundStyle(Color.brownnr2)
-                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8)
+                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8, alignment: .leading)
                     }
                     .frame(width: scaledframeDefaultSizeOne * 308, height: scaledframeDefaultSizeOne * 59, alignment: .center)
                     ZStack{
