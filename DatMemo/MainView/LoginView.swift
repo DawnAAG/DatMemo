@@ -5,6 +5,7 @@
 //  Created by Artiom Gramatin on 26.04.2024.
 //
 
+
 import SwiftUI
 
 struct LoginView: View {
@@ -97,6 +98,7 @@ struct LoginView: View {
                                         }
                                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
                                         .padding(.top, scaledframeDefaultSizeOne*63)
+                            
                             
                         }
 

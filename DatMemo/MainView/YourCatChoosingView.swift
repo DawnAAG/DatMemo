@@ -88,6 +88,7 @@ struct YourCatChoosingView: View {
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
+//                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                 }
             }
         }

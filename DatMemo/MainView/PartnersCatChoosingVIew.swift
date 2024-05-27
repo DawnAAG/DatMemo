@@ -57,7 +57,7 @@ struct PartnersCatChoosingView: View {
                         Image("artiomkaCatChoosingButton")
                             .resizable()
                     }
-                    .frame(width: scaledframewidth, height: scaledframewidth)
+                    .frame(width: 165, height: 165)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
                         print("Your partners cat is SashenkaCat")
@@ -67,7 +67,7 @@ struct PartnersCatChoosingView: View {
                         Image("sashenkaCatChoosingButton")
                             .resizable()
                     }
-                    .frame(width: scaledframewidth, height: scaledframewidth)
+                    .frame(width: 165, height: 165)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
                         print("Your partners cat is DimaCat")
@@ -77,7 +77,8 @@ struct PartnersCatChoosingView: View {
                         Image("dimaCatChoosingButton")
                             .resizable()
                     }
-                    .frame(width: scaledframewidth, height: scaledframewidth)
+                    .frame(width:165, height: 165)
+                    .padding(.bottom, 30)
                     
                 }
             }

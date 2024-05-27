@@ -25,30 +25,36 @@ struct MainPageView: View {
                     HStack{
                         Image("artiomkaCatChoosingButton")
                             .resizable()
-                            .frame(width: scaledframeheight * 1.25, height: scaledframeheight * 1.25)
-                            .padding(sides: [.left], value: scaledframeDefaultSizeOne*293)
+                            .frame(width:75, height: 75)
+                            .padding(sides: [.left], value:293)
                     }
                     HStack(alignment: .center){
                         Text("Artiom")
                             .padding(sides: [.left], value: 10)
                             .font(Font.custom("PressStart2P", fixedSize: 8))
                             .foregroundStyle(Color.brownnr2)
-                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8, alignment: .trailing)
+                            .frame(width:112, height:8, alignment: .trailing)
                         Image("heart")
                             .resizable()
-                            .frame(width: scaledframeDefaultSizeOne * 64, height: scaledframeDefaultSizeOne * 59, alignment: .center)
+                            .frame(width:64, height:59, alignment: .center)
                         Text("Alexandra")
                             .multilineTextAlignment(.leading)
                             .padding(sides: [.right], value: 10)
                             .font(Font.custom("PressStart2P", fixedSize: 8))
                             .foregroundStyle(Color.brownnr2)
-                            .frame(width: scaledframeDefaultSizeOne * 112, height: scaledframeDefaultSizeOne * 8, alignment: .leading)
+                            .frame(width:112, height:8, alignment: .leading)
                     }
-                    .frame(width: scaledframeDefaultSizeOne * 308, height: scaledframeDefaultSizeOne * 59, alignment: .center)
+                    .frame(width:308, height:59, alignment: .center)
                     ZStack{
-                        Image("CalendarElementMain")
-                            .frame(width: scaledframeDefaultSizeOne * 343, height: scaledframeDefaultSizeOne * 450)
+                        Image("Element1")
+                            .resizable()
+                            .scaledToFit()
+                        Image("Element2")
+                            .resizable()
+                            .frame(width:343, height:118, alignment: .top)
+                            .offset(y:-185)
                     }
+                    .frame(width:343, height:450)
                 }
             }
         }
