@@ -50,6 +50,7 @@ struct LoginView: View {
                                                     .resizable()
                                         }
                                         .frame(width: scaledframewidth, height: scaledframewidth)
+                                        .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                             NavigationLink {
                                             PartnersCatChoosingView()
                                         } label: {
@@ -57,6 +58,7 @@ struct LoginView: View {
                                                     .resizable()
                                         }
                                         .frame(width: scaledframewidth, height: scaledframewidth)
+                                        .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
 
                         }
                         .padding(.horizontal,scaledPadding)
@@ -66,13 +68,14 @@ struct LoginView: View {
                                 Image("YourChoosingButton")
                                         .resizable()
                                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                                        .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                                 TextField(text: $username, prompt: Text("Name")) {
                                        Text("Username")
                                    }
-                                .frame(width:80, height: 20)
+                                .frame(width:218, height: 20)
                                 .font(Font.custom("PressStart2P", fixedSize: 20))
                                 .foregroundStyle(Color.brownnr2)
-                                .padding(.leading,-100)
+                                .padding(.leading, 10)
                                 .padding(.top, 53)
                             }
                             .padding(.top, 27)
@@ -80,13 +83,14 @@ struct LoginView: View {
                                 Image("PartnersChoosingButton")
                                         .resizable()
                                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
+                                        .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                                 TextField(text: $partnersname, prompt: Text("Name")) {
                                        Text("Username")
                                    }
-                                .frame(width:80, height: 20)
+                                .frame(width:218, height: 20)
                                 .font(Font.custom("PressStart2P", fixedSize: 20))
                                 .foregroundStyle(Color.brownnr2)
-                                .padding(.leading,-100)
+                                .padding(.leading, 10)
                                 .padding(.top, 53)
                             }
                             .padding(.top, scaledframeDefaultSizeOne*63)
@@ -95,9 +99,11 @@ struct LoginView: View {
                                         } label: {
                                                 Image("SetButton")
                                                     .resizable()
+                                                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                                         }
                                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
                                         .padding(.top, scaledframeDefaultSizeOne*63)
+                            
                             
                             
                         }

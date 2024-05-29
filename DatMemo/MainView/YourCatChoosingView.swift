@@ -68,6 +68,7 @@ struct YourCatChoosingView: View {
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
                         print("Your cat is SashenkaCat")
@@ -78,6 +79,7 @@ struct YourCatChoosingView: View {
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     .padding(.bottom, scaledPadding*1.5)
                     Button {
                         print("Your cat is DimaCat")
@@ -88,7 +90,7 @@ struct YourCatChoosingView: View {
                             .resizable()
                     }
                     .frame(width: scaledframewidth, height: scaledframewidth)
-//                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                 }
             }
         }

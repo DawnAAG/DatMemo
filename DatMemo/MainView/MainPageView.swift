@@ -27,6 +27,7 @@ struct MainPageView: View {
                             .resizable()
                             .frame(width:75, height: 75)
                             .padding(sides: [.left], value:293)
+                            .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     }
                     HStack(alignment: .center){
                         Text("Artiom")
@@ -55,6 +56,7 @@ struct MainPageView: View {
                             .offset(y:-185)
                     }
                     .frame(width:343, height:450)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                 }
             }
         }

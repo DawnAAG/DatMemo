@@ -59,6 +59,7 @@ struct PartnersCatChoosingView: View {
                     }
                     .frame(width: 165, height: 165)
                     .padding(.bottom, scaledPadding*1.5)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     Button {
                         print("Your partners cat is SashenkaCat")
                         chosenCat = 2
@@ -69,6 +70,7 @@ struct PartnersCatChoosingView: View {
                     }
                     .frame(width: 165, height: 165)
                     .padding(.bottom, scaledPadding*1.5)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     Button {
                         print("Your partners cat is DimaCat")
                         chosenCat = 3
@@ -79,6 +81,7 @@ struct PartnersCatChoosingView: View {
                     }
                     .frame(width:165, height: 165)
                     .padding(.bottom, 30)
+                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
                     
                 }
             }
