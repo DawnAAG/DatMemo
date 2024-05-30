@@ -96,6 +96,7 @@ struct LoginView: View {
                             .padding(.top, scaledframeDefaultSizeOne*63)
                             NavigationLink {
                                            MainPageView()
+                                            .navigationBarBackButtonHidden(true)
                                         } label: {
                                                 Image("SetButton")
                                                     .resizable()
