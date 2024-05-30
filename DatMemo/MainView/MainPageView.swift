@@ -13,6 +13,8 @@ struct MainPageView: View {
     @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 165
     @ScaledMetric(relativeTo: .body) var scaledframeheight: CGFloat = 60
     @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     let background = Image("Background")
     var body: some View {
         NavigationView{
@@ -23,17 +25,19 @@ struct MainPageView: View {
                     .scaledToFill()
                 
                 VStack{
-                    NavigationLink{
-                        Profile()
-                        
-                    }label:{
-                        HStack{
-                            Image("artiomkaCatChoosingButton")
-                                .resizable()
-                                .frame(width:75, height: 75)
-                                .padding(sides: [.left], value:293)
-                                .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
-                        }
+                    HStack(alignment:.top) {
+                        NavigationLink{
+                            Profile()
+                            
+                        }label:{
+                            HStack{
+                                Image("artiomkaCatChoosingButton")
+                                    .resizable()
+                                    .frame(width:75, height: 75)
+                                    .padding(sides: [.left], value:293)
+                                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
+                            }
+                    }
                     }
                     HStack(alignment: .center){
                         Text("Artiom")
@@ -57,7 +61,7 @@ struct MainPageView: View {
                     .frame(width:308, height:59, alignment: .center)
                     .padding(.top,44)
                     NavigationLink{
-                        
+                        CalendarView()
                     }label:{
                         ZStack {
                             Image("Element1")

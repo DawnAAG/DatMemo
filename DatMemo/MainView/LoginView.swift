@@ -96,7 +96,7 @@ struct LoginView: View {
                             .padding(.top, scaledframeDefaultSizeOne*63)
                             NavigationLink {
                                            MainPageView()
-                                            .navigationBarBackButtonHidden(true)
+                                            //.navigationBarBackButtonHidden(true)
                                         } label: {
                                                 Image("SetButton")
                                                     .resizable()
@@ -104,9 +104,6 @@ struct LoginView: View {
                                         }
                                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
                                         .padding(.top, scaledframeDefaultSizeOne*63)
-                            
-                            
-                            
                         }
 
                     }
