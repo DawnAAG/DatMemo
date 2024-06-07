@@ -11,7 +11,7 @@ struct SplashScreen: View{
         ZStack {
             
             if self.isActive {
-                LoginView()
+                LoginView(yourchoice: yourchosencat(), partnerschoice:  partnerschosencat(), username: Username(), partnersname: Partnersname())
             }
             else {
                 background

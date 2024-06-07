@@ -1,95 +1,74 @@
 //
-//  CatChoosingView.swift
+//  PartnersCatChoosingView.swift
 //  DatMemo
 //
-//  Created by Artiom Gramatin on 30.04.2024.
+// 
 //
-
 import SwiftUI
+
+class partnerschosencat: ObservableObject {
+    @Published var pchosenCat: Int8 = 0
+}
 
 struct PartnersCatChoosingView: View {
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
-    @ScaledMetric(relativeTo: .body) var scaledframewidth: CGFloat = 165
-    @ScaledMetric(relativeTo: .body) var scaledframeheight: CGFloat = 60
-    @ScaledMetric(relativeTo: .body) var scaledframeButtonHeight: CGFloat = 100
-    @ScaledMetric(relativeTo: .body) var scaledframeButtonWidth: CGFloat = 250
-    @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @State private var catNumber: Int8 = 0
-    @State private var chosenCat: Int8 = 0
-    
-    
+    @EnvironmentObject var partnerschoice: partnerschosencat
+
     var body: some View {
-        ZStack{
+        ZStack {
             background
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-            ZStack{
-                HStack(alignment: .top) {
-                    Text("")
-                                    .foregroundColor(Color.white)
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarItems(leading: Button(action : {
-                                        self.mode.wrappedValue.dismiss()
-                                    }){
-                                        Image(systemName: "arrow.left")
-                                            .foregroundColor(Color.white)
-                                })
+            
+            VStack(alignment: .center) {
+                Button {
+                    print("Your partners cat is ArtiomkaCat")
+                    partnerschoice.pchosenCat = 1
+                    self.mode.wrappedValue.dismiss()
+                } label: {
+                    Image("artiomkaCatChoosingButton")
+                        .resizable()
+                        .frame(width: 165, height: 165)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                        .padding(.bottom, scaledPadding * 1.5)
                 }
-                        }
-                        .edgesIgnoringSafeArea(.top)
-                        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                        
-                            if(value.startLocation.x < 20 && value.translation.width > 100) {
-                                self.mode.wrappedValue.dismiss()
-                            }
-                            
-                        }))
-                VStack(alignment:.center){
-                    Button {
-                        print("Your partners cat is ArtiomkaCat")
-                        chosenCat = 1
-                        print(chosenCat)
-                    } label: {
-                        Image("artiomkaCatChoosingButton")
-                            .resizable()
-                    }
-                    .frame(width: 165, height: 165)
-                    .padding(.bottom, scaledPadding*1.5)
-                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
-                    Button {
-                        print("Your partners cat is SashenkaCat")
-                        chosenCat = 2
-                        print(chosenCat)
-                    } label: {
-                        Image("sashenkaCatChoosingButton")
-                            .resizable()
-                    }
-                    .frame(width: 165, height: 165)
-                    .padding(.bottom, scaledPadding*1.5)
-                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
-                    Button {
-                        print("Your partners cat is DimaCat")
-                        chosenCat = 3
-                        print(chosenCat)
-                    } label: {
-                        Image("dimaCatChoosingButton")
-                            .resizable()
-                    }
-                    .frame(width:165, height: 165)
-                    .padding(.bottom, 30)
-                    .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
-                    
+                
+                Button {
+                    print("Your partners cat is SashenkaCat")
+                    partnerschoice.pchosenCat = 2
+                    self.mode.wrappedValue.dismiss()
+                } label: {
+                    Image("sashenkaCatChoosingButton")
+                        .resizable()
+                        .frame(width: 165, height: 165)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                        .padding(.bottom, scaledPadding * 1.5)
+                }
+                
+                Button {
+                    print("Your partners cat is DimaCat")
+                    partnerschoice.pchosenCat = 3
+                    self.mode.wrappedValue.dismiss() 
+                } label: {
+                    Image("dimaCatChoosingButton")
+                        .resizable()
+                        .frame(width: 165, height: 165)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                 }
             }
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if value.startLocation.x < 20 && value.translation.width > 100 {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
     }
-
-
-#Preview {
-    PartnersCatChoosingView()
 }
 
+#Preview {
+    PartnersCatChoosingView().environmentObject(partnerschosencat())
+}

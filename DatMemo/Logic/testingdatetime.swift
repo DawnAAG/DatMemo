@@ -73,7 +73,17 @@ struct DetailView: View{
                         // O (this is an O for October, not a zero)
                         
                         Text(Date.now.formatted(.dateTime.hour(.twoDigits(amPM: .wide))))
-                        // 06 PM
+                        // 06 PM'
+                        Text(Date.now.formatted(.dateTime.weekday(.wide)))
+                        // Example output: "Saturday"
+                        
+                        // Date only the digits from the day
+                        Text(Date.now.formatted(.dateTime.day()))
+                        // Example output: "7"
+                        
+                        // Month name
+                        Text(Date.now.formatted(.dateTime.month(.wide)))
+                        // Example output: "October"
             
         }
     }
