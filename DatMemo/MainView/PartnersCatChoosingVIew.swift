@@ -2,7 +2,7 @@
 //  PartnersCatChoosingView.swift
 //  DatMemo
 //
-// 
+//
 //
 import SwiftUI
 
@@ -23,6 +23,25 @@ struct PartnersCatChoosingView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
+            HStack(alignment: .top) {
+                Text("")
+                                .foregroundColor(Color.white)
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarItems(leading: Button(action : {
+                                    self.mode.wrappedValue.dismiss()
+                                }){
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(Color.white)
+                            })
+            }
+                    .edgesIgnoringSafeArea(.top)
+                    .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                    
+                        if(value.startLocation.x < 20 && value.translation.width > 100) {
+                            self.mode.wrappedValue.dismiss()
+                        }
+                        
+                    }))
             
             VStack(alignment: .center) {
                 Button {
@@ -52,7 +71,7 @@ struct PartnersCatChoosingView: View {
                 Button {
                     print("Your partners cat is DimaCat")
                     partnerschoice.pchosenCat = 3
-                    self.mode.wrappedValue.dismiss() 
+                    self.mode.wrappedValue.dismiss()
                 } label: {
                     Image("dimaCatChoosingButton")
                         .resizable()

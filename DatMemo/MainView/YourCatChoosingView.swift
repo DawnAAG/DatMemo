@@ -17,6 +17,25 @@ struct YourCatChoosingView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
+            HStack(alignment: .top) {
+                Text("")
+                                .foregroundColor(Color.white)
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarItems(leading: Button(action : {
+                                    self.mode.wrappedValue.dismiss()
+                                }){
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(Color.white)
+                            })
+            }
+                    .edgesIgnoringSafeArea(.top)
+                    .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                    
+                        if(value.startLocation.x < 20 && value.translation.width > 100) {
+                            self.mode.wrappedValue.dismiss()
+                        }
+                        
+                    }))
             
             VStack(alignment: .center) {
                 Button {

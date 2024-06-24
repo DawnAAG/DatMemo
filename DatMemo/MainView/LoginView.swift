@@ -1,9 +1,3 @@
-//
-//  LoginView.swift
-//  DatMemo
-//
-//  
-//
 import SwiftUI
 
 class Username: ObservableObject {
@@ -22,11 +16,17 @@ struct LoginView: View {
     @ScaledMetric(relativeTo: .body) var scaledframeButtonHeight: CGFloat = 100
     @ScaledMetric(relativeTo: .body) var scaledframeButtonWidth: CGFloat = 250
     @ScaledMetric(relativeTo: .body) var scaledframeDefaultSizeOne: CGFloat = 1
+    @State var buttonOffset: CGFloat = 0
+    @State private var showErrorText = false
     
     @StateObject var yourchoice = yourchosencat()
     @StateObject var partnerschoice = partnerschosencat()
     @ObservedObject var username = Username()
     @ObservedObject var partnersname = Partnersname()
+    
+    @State private var showError = false
+    @State private var buttonScale: CGFloat = 1.0
+    @State private var showNextView = false
     
     var body: some View {
         NavigationView {
@@ -60,7 +60,7 @@ struct LoginView: View {
                         } label: {
                             ImageForCatChoice(imageName: imageName(for: yourchoice.ychosenCat))
                         }
-                        .frame(width: 160, height: 160)
+                        .frame(width: scaledframewidth, height: scaledframewidth)
                         .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                         
                         NavigationLink {
@@ -68,7 +68,7 @@ struct LoginView: View {
                         } label: {
                             ImageForCatChoice(imageName: imageName(for: partnerschoice.pchosenCat))
                         }
-                        .frame(width: 160, height: 160)
+                        .frame(width: scaledframewidth, height: scaledframewidth)
                         .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                     }
                     .padding(.horizontal, scaledPadding)
@@ -82,13 +82,14 @@ struct LoginView: View {
                             TextField(text: $username.username, prompt: Text("Name")) {
                                 Text("Username")
                             }
-                            .frame(width: 218, height: 20)
+                            .frame(width: scaledframeButtonWidth * 0.87, height: scaledframeButtonHeight * 0.2)
                             .font(Font.custom("PressStart2P", fixedSize: 20))
                             .foregroundColor(.brownnr2)
                             .padding(.leading, 10)
-                            .padding(.top, 53)
+                            .padding(.top, scaledframeButtonHeight * 0.53)
+                            .disableAutocorrection(true)
                         }
-                        .padding(.top, 27)
+                        .padding(.top, scaledPadding)
                         
                         ZStack {
                             Image("PartnersChoosingButton")
@@ -98,28 +99,57 @@ struct LoginView: View {
                             TextField(text: $partnersname.partnersname, prompt: Text("Name")) {
                                 Text("Username")
                             }
-                            .frame(width: 218, height: 20)
+                            .frame(width: scaledframeButtonWidth * 0.87, height: scaledframeButtonHeight * 0.2)
                             .font(Font.custom("PressStart2P", fixedSize: 20))
                             .foregroundColor(.brownnr2)
                             .padding(.leading, 10)
-                            .padding(.top, 53)
+                            .padding(.top, scaledframeButtonHeight * 0.53)
+                            .disableAutocorrection(true)
                         }
-                        .padding(.top, scaledframeDefaultSizeOne * 63)
+                        .padding(.top, scaledPadding)
                         
-                        NavigationLink {
-                            MainPageView(username: username, partnersname: partnersname, yourchoice: yourchoice)
-                                .navigationBarBackButtonHidden(true)
-                        } label: {
+                        Button(action: {
+                            if username.username.isEmpty || partnersname.partnersname.isEmpty || yourchoice.ychosenCat == 0 || partnerschoice.pchosenCat == 0 {
+                                showError = true
+                                withAnimation(Animation.easeInOut(duration: 0.1).repeatCount(3)) {
+                                    buttonOffset = 5
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    withAnimation(Animation.easeInOut(duration: 0.1).repeatCount(3)) {
+                                        buttonOffset = -5
+                                    }
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    withAnimation {
+                                        buttonOffset = 0
+                                    }
+                                }
+                            } else {
+                                showError = false
+                                showNextView = true
+                            }
+                        }) {
                             Image("SetButton")
                                 .resizable()
                                 .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
+                                .offset(x: buttonOffset)
                         }
                         .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight * 0.75)
-                        .padding(.top, scaledframeDefaultSizeOne * 63)
+                        .padding(.top, scaledPadding)
+                        
+                        Text("You need to fill all the fields and choose cats")
+                            .font(Font.custom("PressStart2P", fixedSize: 8))
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 20, alignment: .center)
+                            .padding(.top, scaledPadding * 0.5)
+                            .opacity(showError ? 1 : 0)
                     }
                 }
             }
         }
+        .fullScreenCover(isPresented: $showNextView, content: {
+            MainPageView(yourchoice: yourchoice, username: username, partnersname: partnersname)
+        })
     }
     
     private func imageName(for catChoice: Int8) -> String {
@@ -164,4 +194,3 @@ extension View {
 #Preview {
     LoginView()
 }
-
