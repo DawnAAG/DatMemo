@@ -111,18 +111,11 @@ struct LoginView: View {
                         Button(action: {
                             if username.username.isEmpty || partnersname.partnersname.isEmpty || yourchoice.ychosenCat == 0 || partnerschoice.pchosenCat == 0 {
                                 showError = true
-                                withAnimation(Animation.easeInOut(duration: 0.1).repeatCount(3)) {
+                                withAnimation(Animation.easeInOut(duration: 0.1).repeatCount(3, autoreverses: true)) {
                                     buttonOffset = 5
                                 }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                    withAnimation(Animation.easeInOut(duration: 0.1).repeatCount(3)) {
-                                        buttonOffset = -5
-                                    }
-                                }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                    withAnimation {
-                                        buttonOffset = 0
-                                    }
+                                    buttonOffset = 0
                                 }
                             } else {
                                 showError = false
@@ -148,7 +141,7 @@ struct LoginView: View {
             }
         }
         .fullScreenCover(isPresented: $showNextView, content: {
-            MainPageView(yourchoice: yourchoice, username: username, partnersname: partnersname)
+            MainPageView(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschoice)
         })
     }
     
@@ -191,6 +184,7 @@ extension View {
     }
 }
 
-#Preview {
+#Preview{
     LoginView()
 }
+

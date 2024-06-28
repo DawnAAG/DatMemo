@@ -4,6 +4,7 @@ class yourchosencat: ObservableObject {
     @Published var ychosenCat: Int8 = 0
 }
 
+
 struct YourCatChoosingView: View {
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
@@ -41,7 +42,7 @@ struct YourCatChoosingView: View {
                 Button {
                     print("Your cat is ArtiomkaCat")
                     yourchoice.ychosenCat = 1
-                    self.mode.wrappedValue.dismiss() // Dismiss the view
+                    self.mode.wrappedValue.dismiss()
                 } label: {
                     Image("artiomkaCatChoosingButton")
                         .resizable()
@@ -53,7 +54,7 @@ struct YourCatChoosingView: View {
                 Button {
                     print("Your cat is SashenkaCat")
                     yourchoice.ychosenCat = 2
-                    self.mode.wrappedValue.dismiss() // Dismiss the view
+                    self.mode.wrappedValue.dismiss()
                 } label: {
                     Image("sashenkaCatChoosingButton")
                         .resizable()
@@ -65,7 +66,7 @@ struct YourCatChoosingView: View {
                 Button {
                     print("Your cat is DimaCat")
                     yourchoice.ychosenCat = 3
-                    self.mode.wrappedValue.dismiss() // Dismiss the view
+                    self.mode.wrappedValue.dismiss() 
                 } label: {
                     Image("dimaCatChoosingButton")
                         .resizable()

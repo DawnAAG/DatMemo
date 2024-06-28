@@ -14,6 +14,7 @@ struct MainPageView: View {
     @ObservedObject var yourchoice: yourchosencat
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
+    @ObservedObject var partnerschosencat: partnerschosencat
     let background = Image("Background")
     
     var body: some View {
@@ -29,7 +30,7 @@ struct MainPageView: View {
                     VStack {
                         HStack(alignment: .top) {
                             NavigationLink {
-                                Profile()
+                                Profile(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
                             } label: {
                                 HStack {
                                     Image(imageName(for: yourchoice.ychosenCat))
@@ -68,7 +69,7 @@ struct MainPageView: View {
                         .padding(.top, scaledsize * (isSmallDevice ? 0.1 : 0.44))
                         
                         NavigationLink {
-                            CalendarView()
+                            CalendarView(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
                                 .navigationBarBackButtonHidden(true)
                         } label: {
                             ZStack {
@@ -116,6 +117,6 @@ struct MainPageView: View {
 
 
 #Preview {
-    MainPageView(yourchoice: yourchosencat(),username: Username(), partnersname: Partnersname())
+    MainPageView(yourchoice: yourchosencat(),username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
 }
 

@@ -10,9 +10,14 @@ import SwiftData
 
 @main
 struct DatMemoApp: App {
+    @StateObject private var photoManager = PhotoManager()
     var body: some Scene {
         WindowGroup {
             SplashScreen()
+                .environmentObject(photoManager)
+                                .onAppear {
+                                    photoManager.loadPhotos()
+                                }
         }
     }
 }

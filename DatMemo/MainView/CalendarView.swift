@@ -6,7 +6,10 @@ struct CalendarView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @State private var currentDate = Date()
-    
+    @ObservedObject var yourchoice: yourchosencat
+    @ObservedObject var username: Username
+    @ObservedObject var partnersname: Partnersname
+    @ObservedObject var partnerschosencat: partnerschosencat
     private var calendar: Calendar {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_US")
@@ -57,6 +60,15 @@ struct CalendarView: View {
         }
     }
     
+    private func imageName(for catChoice: Int8) -> String {
+        switch catChoice {
+        case 1: return "artiomkaCatChoosingButton"
+        case 2: return "sashenkaCatChoosingButton"
+        case 3: return "dimaCatChoosingButton"
+        default: return "ChooseButtonCats"
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -71,9 +83,9 @@ struct CalendarView: View {
                         HStack {
                             Spacer()
                             NavigationLink {
-                                Profile()
+                                Profile(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
                             } label: {
-                                Image("artiomkaCatChoosingButton")
+                                Image(imageName(for: yourchoice.ychosenCat))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
@@ -186,10 +198,10 @@ struct CalendarView: View {
                     }
                 }
                 .frame(width: geometry.size.width)
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .navigationBarHidden(true)
                 .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                    if(value.startLocation.x < 20 && value.translation.width > 100) {
+                    if value.startLocation.x < 20 && value.translation.width > 100 {
                         self.mode.wrappedValue.dismiss()
                     }
                 }))
@@ -198,17 +210,7 @@ struct CalendarView: View {
     }
 }
 
-struct DayView: View {
-    var date: Date
-    
-    var body: some View {
-        Text("Details for \(date)")
-            .font(.title)
-            .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
 #Preview {
-    CalendarView()
+    CalendarView(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
 }
 
