@@ -29,6 +29,7 @@
 		09CF49002BF4C74C00CDF447 /* LogMay in Resources */ = {isa = PBXBuildFile; fileRef = 09CF48FF2BF4C74C00CDF447 /* LogMay */; };
 		09CF49022BF4C85600CDF447 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CF49012BF4C85600CDF447 /* MainPageView.swift */; };
 		09CF49082BF4F1E700CDF447 /* PartnersCatChoosingVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CF49072BF4F1E700CDF447 /* PartnersCatChoosingVIew.swift */; };
+		09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF93872C2FE30800A18BE7 /* TextEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		09CF48FF2BF4C74C00CDF447 /* LogMay */ = {isa = PBXFileReference; lastKnownFileType = text; path = LogMay; sourceTree = "<group>"; };
 		09CF49012BF4C85600CDF447 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		09CF49072BF4F1E700CDF447 /* PartnersCatChoosingVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersCatChoosingVIew.swift; sourceTree = "<group>"; };
+		09EF93872C2FE30800A18BE7 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,8 +179,6 @@
 				09CF49072BF4F1E700CDF447 /* PartnersCatChoosingVIew.swift */,
 				09A04BCA2C08612A00D7F4A7 /* CalendarView.swift */,
 				099848432C2EF99F00112D8F /* DayView.swift */,
-				099848472C2EFB4600112D8F /* PhotoManager.swift */,
-				099848452C2EFB2100112D8F /* ImagePicker.swift */,
 				09CF49012BF4C85600CDF447 /* MainPageView.swift */,
 				09A04BC82C07BEDE00D7F4A7 /* Profile.swift */,
 				0949B0BC2C2AB0B2004B3850 /* settingsview.swift */,
@@ -189,6 +189,9 @@
 		0949133E2BDA564F00D6D9CE /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				099848472C2EFB4600112D8F /* PhotoManager.swift */,
+				099848452C2EFB2100112D8F /* ImagePicker.swift */,
+				09EF93872C2FE30800A18BE7 /* TextEditorView.swift */,
 				0949AFDD2C29B6C2004B3850 /* Models */,
 				0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */,
 				09A04BC62BFCEC1D00D7F4A7 /* testingdatetime.swift */,
@@ -356,6 +359,7 @@
 				099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */,
 				094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */,
 				099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */,
+				09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */,
 				099848442C2EF99F00112D8F /* DayView.swift in Sources */,
 				09542EF42C2C602D00E21096 /* Colors.swift in Sources */,
 				09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */,
@@ -534,6 +538,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DatMemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -564,6 +570,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DatMemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
