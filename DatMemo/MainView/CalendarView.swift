@@ -170,7 +170,7 @@ struct CalendarView: View {
                                     
                                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: geometry.size.width * 0.015), count: 7), spacing: geometry.size.height * 0.015) {
                                         ForEach(daysInMonth, id: \.self) { date in
-                                            NavigationLink(destination: DayView(date: date)) {
+                                            NavigationLink(destination: DayView(date: date,yourchoice: yourchoice,username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)) {
                                                 ZStack {
                                                     Image("backgrounddaybuttonimage")
                                                         .resizable()
