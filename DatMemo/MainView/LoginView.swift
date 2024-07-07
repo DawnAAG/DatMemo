@@ -79,9 +79,12 @@ struct LoginView: View {
                                 .resizable()
                                 .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
                                 .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
-                            TextField(text: $username.username, prompt: Text("Name")) {
-                                Text("Username")
-                            }
+                            TextField("Name", text: $username.username)
+                                .onChange(of: username.username) { newValue, _ in
+                                    if newValue.count > 9 {
+                                        username.username = String(newValue.prefix(9))
+                                    }
+                                }
                             .frame(width: scaledframeButtonWidth * 0.87, height: scaledframeButtonHeight * 0.2)
                             .font(Font.custom("PressStart2P", fixedSize: 20))
                             .foregroundColor(.brownnr2)
@@ -96,9 +99,12 @@ struct LoginView: View {
                                 .resizable()
                                 .frame(width: scaledframeButtonWidth, height: scaledframeButtonHeight)
                                 .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
-                            TextField(text: $partnersname.partnersname, prompt: Text("Name")) {
-                                Text("Username")
-                            }
+                            TextField("Name", text: $partnersname.partnersname)
+                                .onChange(of: partnersname.partnersname) { newValue, _ in
+                                    if newValue.count > 9 {
+                                        partnersname.partnersname = String(newValue.prefix(9))
+                                    }
+                                }
                             .frame(width: scaledframeButtonWidth * 0.87, height: scaledframeButtonHeight * 0.2)
                             .font(Font.custom("PressStart2P", fixedSize: 20))
                             .foregroundColor(.brownnr2)
@@ -120,6 +126,9 @@ struct LoginView: View {
                             } else {
                                 showError = false
                                 showNextView = true
+                                
+                                username.username = String(username.username.prefix(9))
+                                partnersname.partnersname = String(partnersname.partnersname.prefix(9))
                             }
                         }) {
                             Image("SetButton")
@@ -183,6 +192,7 @@ extension View {
         }
     }
 }
+
 
 #Preview{
     LoginView()
