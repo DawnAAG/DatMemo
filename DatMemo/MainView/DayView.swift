@@ -296,9 +296,10 @@ struct DayView: View {
     }
 }
 
-struct DayView_Previews: PreviewProvider {
-    static var previews: some View {
-        DayView(date: Date(), yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
-            .environmentObject(PhotoManager())
-    }
+#Preview{
+    DayView(date: Date(), yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
+        .environmentObject(PhotoManager())
 }
+
+
+//Do the fucking aspectratio for small devices, do not make it look shitty, also add the + button into the calendarview and mainView
