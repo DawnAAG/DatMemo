@@ -6,69 +6,87 @@
 //
 import SwiftUI
 import Combine
-import AVFoundation
 
 class PhotoManager: ObservableObject {
     @Published var photos: [Date: UIImage] = [:]
     @Published var videos: [Date: URL] = [:]
     @Published var texts: [Date: String] = [:]
-    
+
+    private let photosKey = "photosKey"
+    private let videosKey = "videosKey"
+    private let textsKey = "textsKey"
+
+    init() {
+        loadPhotos()
+        loadVideos()
+        loadTexts()
+    }
+
     func savePhoto(_ photo: UIImage, for date: Date) {
         photos[date] = photo
-        // Save the photo to persistent storage
         savePhotosToDisk()
     }
 
     func saveVideo(_ video: URL, for date: Date) {
         videos[date] = video
-        // Save the video to persistent storage
         saveVideosToDisk()
     }
-    
+
     func saveText(_ text: String, for date: Date) {
         texts[date] = text
-        // Save the text to persistent storage
         saveTextsToDisk()
     }
-    
+
     func loadPhotos() {
-        // Load photos from persistent storage
         loadPhotosFromDisk()
     }
 
     func loadVideos() {
-        // Load videos from persistent storage
         loadVideosFromDisk()
     }
 
     func loadTexts() {
-        // Load texts from persistent storage
         loadTextsFromDisk()
     }
-    
+
     private func savePhotosToDisk() {
-        // Implement saving photos to persistent storage, e.g., UserDefaults, file system, CoreData, etc.
+        let photoData = photos.mapValues { $0.pngData() }
+        if let data = try? JSONEncoder().encode(photoData) {
+            UserDefaults.standard.set(data, forKey: photosKey)
+        }
     }
-    
+
     private func saveVideosToDisk() {
-        // Implement saving videos to persistent storage
+        let videoData = videos.mapValues { $0.absoluteString }
+        if let data = try? JSONEncoder().encode(videoData) {
+            UserDefaults.standard.set(data, forKey: videosKey)
+        }
     }
 
     private func saveTextsToDisk() {
-        // Implement saving texts to persistent storage
+        if let data = try? JSONEncoder().encode(texts) {
+            UserDefaults.standard.set(data, forKey: textsKey)
+        }
     }
-    
+
     private func loadPhotosFromDisk() {
-        // Implement loading photos from persistent storage
+        if let data = UserDefaults.standard.data(forKey: photosKey),
+           let photoData = try? JSONDecoder().decode([Date: Data].self, from: data) {
+            photos = photoData.compactMapValues { UIImage(data: $0) }
+        }
     }
 
     private func loadVideosFromDisk() {
-        // Implement loading videos from persistent storage
+        if let data = UserDefaults.standard.data(forKey: videosKey),
+           let videoData = try? JSONDecoder().decode([Date: String].self, from: data) {
+            videos = videoData.compactMapValues { URL(string: $0) }
+        }
     }
 
     private func loadTextsFromDisk() {
-        // Implement loading texts from persistent storage
+        if let data = UserDefaults.standard.data(forKey: textsKey),
+           let loadedTexts = try? JSONDecoder().decode([Date: String].self, from: data) {
+            texts = loadedTexts
+        }
     }
 }
-
-

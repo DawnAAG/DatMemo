@@ -15,9 +15,6 @@ struct DatMemoApp: App {
         WindowGroup {
             SplashScreen()
                 .environmentObject(photoManager)
-                                .onAppear {
-                                    photoManager.loadPhotos()
-                                }
         }
     }
 }

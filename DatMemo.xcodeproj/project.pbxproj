@@ -20,6 +20,8 @@
 		0949B0BD2C2AB0B2004B3850 /* settingsview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B0BC2C2AB0B2004B3850 /* settingsview.swift */; };
 		094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094EC4B32C18655100D34CDB /* YourCatChoosingView.swift */; };
 		09542EF42C2C602D00E21096 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09542EF32C2C602D00E21096 /* Colors.swift */; };
+		096EEE3A2C3E8B3800EAA63B /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EEE392C3E8B3800EAA63B /* CaptureView.swift */; };
+		097C33542C3BEF8900A38C17 /* PreiewSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C33532C3BEF8900A38C17 /* PreiewSendView.swift */; };
 		099848442C2EF99F00112D8F /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848432C2EF99F00112D8F /* DayView.swift */; };
 		099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848452C2EFB2100112D8F /* ImagePicker.swift */; };
 		099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848472C2EFB4600112D8F /* PhotoManager.swift */; };
@@ -66,6 +68,9 @@
 		0949B0BC2C2AB0B2004B3850 /* settingsview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsview.swift; sourceTree = "<group>"; };
 		094EC4B32C18655100D34CDB /* YourCatChoosingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourCatChoosingView.swift; sourceTree = "<group>"; };
 		09542EF32C2C602D00E21096 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		096EEE362C3D782D00EAA63B /* DatMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatMemo.entitlements; sourceTree = "<group>"; };
+		096EEE392C3E8B3800EAA63B /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		097C33532C3BEF8900A38C17 /* PreiewSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreiewSendView.swift; sourceTree = "<group>"; };
 		099848432C2EF99F00112D8F /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		099848452C2EFB2100112D8F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		099848472C2EFB4600112D8F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 		0949130B2BD988DD00D6D9CE /* DatMemo */ = {
 			isa = PBXGroup;
 			children = (
+				096EEE362C3D782D00EAA63B /* DatMemo.entitlements */,
 				094913452BDB969C00D6D9CE /* Fonts */,
 				0949133E2BDA564F00D6D9CE /* Logic */,
 				0949133F2BDA565900D6D9CE /* LogFiles */,
@@ -179,6 +185,8 @@
 				09CF49072BF4F1E700CDF447 /* PartnersCatChoosingVIew.swift */,
 				09A04BCA2C08612A00D7F4A7 /* CalendarView.swift */,
 				099848432C2EF99F00112D8F /* DayView.swift */,
+				096EEE392C3E8B3800EAA63B /* CaptureView.swift */,
+				097C33532C3BEF8900A38C17 /* PreiewSendView.swift */,
 				09CF49012BF4C85600CDF447 /* MainPageView.swift */,
 				09A04BC82C07BEDE00D7F4A7 /* Profile.swift */,
 				0949B0BC2C2AB0B2004B3850 /* settingsview.swift */,
@@ -356,11 +364,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097C33542C3BEF8900A38C17 /* PreiewSendView.swift in Sources */,
 				099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */,
 				094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */,
 				099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */,
 				09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */,
 				099848442C2EF99F00112D8F /* DayView.swift in Sources */,
+				096EEE3A2C3E8B3800EAA63B /* CaptureView.swift in Sources */,
 				09542EF42C2C602D00E21096 /* Colors.swift in Sources */,
 				09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */,
 				094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */,
@@ -531,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DatMemo/DatMemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DatMemo/Preview Content\"";
@@ -538,6 +549,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DatMemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DatMemo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -563,6 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DatMemo/DatMemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DatMemo/Preview Content\"";
@@ -570,6 +584,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DatMemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DatMemo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
