@@ -21,6 +21,7 @@
 		094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094EC4B32C18655100D34CDB /* YourCatChoosingView.swift */; };
 		09542EF42C2C602D00E21096 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09542EF32C2C602D00E21096 /* Colors.swift */; };
 		096EEE3A2C3E8B3800EAA63B /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EEE392C3E8B3800EAA63B /* CaptureView.swift */; };
+		096EEE3C2C3FEC8A00EAA63B /* settingsmanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EEE3B2C3FEC8A00EAA63B /* settingsmanager.swift */; };
 		097C33542C3BEF8900A38C17 /* PreiewSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C33532C3BEF8900A38C17 /* PreiewSendView.swift */; };
 		099848442C2EF99F00112D8F /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848432C2EF99F00112D8F /* DayView.swift */; };
 		099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848452C2EFB2100112D8F /* ImagePicker.swift */; };
@@ -70,6 +71,7 @@
 		09542EF32C2C602D00E21096 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		096EEE362C3D782D00EAA63B /* DatMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatMemo.entitlements; sourceTree = "<group>"; };
 		096EEE392C3E8B3800EAA63B /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		096EEE3B2C3FEC8A00EAA63B /* settingsmanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsmanager.swift; sourceTree = "<group>"; };
 		097C33532C3BEF8900A38C17 /* PreiewSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreiewSendView.swift; sourceTree = "<group>"; };
 		099848432C2EF99F00112D8F /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		099848452C2EFB2100112D8F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				099848472C2EFB4600112D8F /* PhotoManager.swift */,
+				096EEE3B2C3FEC8A00EAA63B /* settingsmanager.swift */,
 				099848452C2EFB2100112D8F /* ImagePicker.swift */,
 				09EF93872C2FE30800A18BE7 /* TextEditorView.swift */,
 				0949AFDD2C29B6C2004B3850 /* Models */,
@@ -370,6 +373,7 @@
 				099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */,
 				09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */,
 				099848442C2EF99F00112D8F /* DayView.swift in Sources */,
+				096EEE3C2C3FEC8A00EAA63B /* settingsmanager.swift in Sources */,
 				096EEE3A2C3E8B3800EAA63B /* CaptureView.swift in Sources */,
 				09542EF42C2C602D00E21096 /* Colors.swift in Sources */,
 				09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */,

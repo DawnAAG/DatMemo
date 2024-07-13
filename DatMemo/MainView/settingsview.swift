@@ -21,6 +21,8 @@ struct CustomBackButton1: View {
     }
 }
 
+import SwiftUI
+
 struct settingsview: View {
     private func imageName(for catChoice: Int8) -> String {
         switch catChoice {
@@ -30,13 +32,14 @@ struct settingsview: View {
         default: return "ChooseButtonCats"
         }
     }
+
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
     @EnvironmentObject var yourchoice: yourchosencat
     @EnvironmentObject var partnerschosencat: partnerschosencat
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+
     var body: some View {
         GeometryReader { geometry in
             let isSmallDevice = geometry.size.height < 667
@@ -51,34 +54,38 @@ struct settingsview: View {
                     Form {
                         Section(header: Text("Your Profile")) {
                             TextField("Username", text: $username.username)
+                                .onChange(of: username.username) { newValue in
+                                    SettingsManager.shared.saveUsername(newValue)
+                                }
                             NavigationLink {
                                 YourCatChoosingView().environmentObject(yourchoice)
                             } label: {
                                 ImageForCatChoice(imageName: imageName(for: yourchoice.ychosenCat))
                             }
-                            .frame(width: isSmallDevice ? 140 : 160, height: isSmallDevice ? 140 : 160)
+                            .frame(width: isSmallDevice ? 150 : 170, height: isSmallDevice ? 140 : 160)
                             .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                             .padding()
                         }
                         .listRowBackground(Color("Color1"))
                         Section(header: Text("Partner's Profile")) {
                             TextField("Partner's Name", text: $partnersname.partnersname)
+                                .onChange(of: partnersname.partnersname) { newValue in
+                                    SettingsManager.shared.savePartnersname(newValue)
+                                }
                             NavigationLink {
                                 PartnersCatChoosingView().environmentObject(partnerschosencat)
                             } label: {
                                 ImageForCatChoice(imageName: imageName(for: partnerschosencat.pchosenCat))
                             }
-                            .frame(width: isSmallDevice ? 140 : 160, height: isSmallDevice ? 140 : 160)
+                            .frame(width: isSmallDevice ? 150 : 170, height: isSmallDevice ? 140 : 160)
                             .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                             .padding()
                         }
                         .listRowBackground(Color("Color1"))
                     }
-                    .font(Font.custom("PressStart2P", fixedSize:isSmallDevice ? 10 : 14))
+                    .font(Font.custom("PressStart2P", fixedSize: isSmallDevice ? 10 : 14))
                     .scrollContentBackground(.hidden)
-                    
                 }
-                
             }
             .navigationBarHidden(true)
             .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
@@ -87,14 +94,24 @@ struct settingsview: View {
                 }
             }))
         }
+        .onAppear {
+            // Load saved data
+            username.username = SettingsManager.shared.getUsername() ?? ""
+            partnersname.partnersname = SettingsManager.shared.getPartnersname() ?? ""
+            yourchoice.ychosenCat = SettingsManager.shared.getYourChoice()
+            partnerschosencat.pchosenCat = SettingsManager.shared.getPartnersChoice()
+        }
+        .onChange(of: yourchoice.ychosenCat) { newValue in
+            SettingsManager.shared.saveYourChoice(newValue)
+        }
+        .onChange(of: partnerschosencat.pchosenCat) { newValue in
+            SettingsManager.shared.savePartnersChoice(newValue)
+        }
     }
 }
-    
-#Preview{
+
+#Preview {
     settingsview(username: Username(), partnersname: Partnersname())
         .environmentObject(yourchosencat())
         .environmentObject(partnerschosencat())
-
 }
-
-

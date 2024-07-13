@@ -4,43 +4,63 @@
 //
 import SwiftUI
 
-struct SplashScreen: View{
-    @State var isActive: Bool = false
-    let background = Image("Background")
-    var body: some View{
+struct SplashScreen: View {
+    @State private var isActive: Bool = false
+    @State private var shouldNavigateToMainPage: Bool = false
+    
+    var body: some View {
         ZStack {
-            
             if self.isActive {
-                LoginView()
-            }
-            else {
-                background
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-            VStack{
-                Image("logo")
+                if self.shouldNavigateToMainPage {
+                    MainPageView(
+                        yourchoice: yourchosencat(),
+                        username: Username(),
+                        partnersname: Partnersname(),
+                        partnerschosencat: partnerschosencat()
+                    )
+                } else {
+                    LoginView()
+                }
+            } else {
+                Image("Background")
                     .resizable()
-                    .scaledToFit()
-                    .imageScale(.small)
-                    .containerRelativeFrame(.horizontal){
-                        size, axis in size * 0.5
-                    }
-            }
+                    .ignoresSafeArea()
+                    .scaledToFill()
+                
+                VStack {
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                }
             }
         }
         .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        withAnimation {
-                            self.isActive = true
-                        }
-                    }
-                }
-
+            checkUserLoginStatus()
+        }
+    }
+    
+    private func checkUserLoginStatus() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let username = UserDefaults.standard.string(forKey: "username")
+            let partnersname = UserDefaults.standard.string(forKey: "partnersname")
+            let ychosenCat = UserDefaults.standard.value(forKey: "ychosenCat") as? Int
+            let pchosenCat = UserDefaults.standard.value(forKey: "pchosenCat") as? Int
+            
+            if username != nil && partnersname != nil && ychosenCat != nil && pchosenCat != nil {
+                shouldNavigateToMainPage = true
+            } else {
+                shouldNavigateToMainPage = false
+            }
+            withAnimation {
+                self.isActive = true
+            }
+        }
     }
 }
 
-#Preview {
-    SplashScreen()
+struct SplashScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        SplashScreen()
+    }
 }
-

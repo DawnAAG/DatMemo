@@ -9,17 +9,20 @@ import AVKit
 
 struct PreviewSendView: View {
     let date: Date
+    @EnvironmentObject var photoManager: PhotoManager
     @ObservedObject var yourchoice: yourchosencat
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
     @ObservedObject var partnerschosencat: partnerschosencat
-    @EnvironmentObject var photoManager: PhotoManager
+
     @State private var showingShareSheet = false
     @State private var capturedImage: UIImage?
+    @State private var isButtonHidden = false
+    @State private var isBackButtonHidden = false
     @ScaledMetric(relativeTo: .body) var scaledsize: CGFloat = 100
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+
     private func imageName(for catChoice: Int8) -> String {
         switch catChoice {
         case 1: return "artiomkaCatChoosingButton"
@@ -44,6 +47,7 @@ struct PreviewSendView: View {
                             CustomBackButton1 {
                                 self.mode.wrappedValue.dismiss()
                             }
+                            .opacity(isBackButtonHidden ? 0 : 1)
                         }
                         .offset(x: isSmallDevice ? 75 : 75)
                         .frame(width: isSmallDevice ? 42 : 42, height: isSmallDevice ? 42 : 42)
@@ -162,20 +166,28 @@ struct PreviewSendView: View {
                             .resizable()
                             .frame(width: isSmallDevice ? 75 : 75, height: isSmallDevice ? 75 : 75)
                         Button(action: {
-                            capturedImage = captureViewAsImage()
-                                showingShareSheet = true
+                            isButtonHidden = true
+                            isBackButtonHidden = true
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                capturedImage = captureViewAsImage()
+                                isButtonHidden = false
+                                isBackButtonHidden = false
+                                if capturedImage != nil {
+                                    showingShareSheet = true
+                                }
+                            }
                         }) {
                             Image("setbuttoncircle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isSmallDevice ? 100 : 100, height: isSmallDevice ? 75 : 75)
                         }
+                        .opacity(isButtonHidden ? 0 : 1)
                         .sheet(isPresented: $showingShareSheet) {
                             if let capturedImage = capturedImage {
                                 ShareSheet(activityItems: [capturedImage])
                             }
-                            
-                    }
+                        }
                         Image(imageName(for: partnerschosencat.pchosenCat))
                             .resizable()
                             .frame(width: isSmallDevice ? 75 : 75, height: isSmallDevice ? 75 : 75)
@@ -203,25 +215,10 @@ struct PreviewSendView: View {
     }
 
     private func captureViewAsImage() -> UIImage {
-        let captureView = CaptureView(
-            date: date,
-            yourchoice: yourchoice,
-            username: username,
-            partnersname: partnersname,
-            partnerschosencat: partnerschosencat
-        )
-        .environmentObject(photoManager)
-
-        let controller = UIHostingController(rootView: captureView)
-        let view = controller.view
-
-        let targetSize = controller.sizeThatFits(in: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        return renderer.image { context in
-            view?.drawHierarchy(in: view?.bounds ?? .zero, afterScreenUpdates: true)
+        let window = UIApplication.shared.windows.first!
+        let renderer = UIGraphicsImageRenderer(size: window.bounds.size)
+        return renderer.image { _ in
+            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
         }
     }
 }
