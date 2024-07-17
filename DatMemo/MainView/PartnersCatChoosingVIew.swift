@@ -57,7 +57,7 @@ struct PartnersCatChoosingView: View {
                     Image("sashenkaCatChoosingButton")
                         .resizable()
                         .frame(width: 165, height: 165)
-                        .shadow(color: .black, radius: 0, x: 6, y: 5)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                         .padding(.bottom, scaledPadding * 1.5)
                 }
 
@@ -69,7 +69,7 @@ struct PartnersCatChoosingView: View {
                     Image("dimaCatChoosingButton")
                         .resizable()
                         .frame(width: 165, height: 165)
-                        .shadow(color: .black, radius: 0, x: 6, y: 5)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                 }
 
                 Spacer()

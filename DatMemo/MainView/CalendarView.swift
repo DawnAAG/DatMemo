@@ -114,7 +114,7 @@ struct CalendarView: View {
                                 Image(imageName(for: yourchoice.ychosenCat))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .shadow(color: .black, radius: 0, x: 6, y: 5)
+                                    .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                                     .frame(width: geometry.size.width * (isSmallDevice ? 0.15 : 0.18), height: geometry.size.width * (isSmallDevice ? 0.15 : 0.18))
                             }
                             .padding(.trailing, geometry.size.width * 0.05)
@@ -127,7 +127,7 @@ struct CalendarView: View {
                             Image("calendarviewimg")
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.7)
-                                .shadow(color: .black, radius: 0, x: 6, y: 5)
+                                .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                                 .offset(y: -geometry.size.height * 0.05)
 
                             VStack {
@@ -139,7 +139,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.05 : 0.06), height: geometry.size.width * (isSmallDevice ? 0.04 : 0.05))
-                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                                     }
 
                                     Spacer()
@@ -149,7 +149,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.6 : 0.7), height: geometry.size.height * 0.09)
-                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
 
                                         Text(monthName)
                                             .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.04 : 0.05)))
@@ -165,7 +165,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.05 : 0.06), height: geometry.size.width * (isSmallDevice ? 0.04 : 0.05))
-                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                                     }
                                 }
                                 .padding(.horizontal)
@@ -179,7 +179,7 @@ struct CalendarView: View {
                                         .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.05)
                                         .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))
                                         .foregroundColor(.white)
-                                        .shadow(color: .black, radius: 0, x: 2, y: 3)
+                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 }
                                 .padding(.vertical, geometry.size.height * 0.01)
 
@@ -190,7 +190,7 @@ struct CalendarView: View {
                                                 .font(Font.custom("PressStart2P", size: geometry.size.width * 0.03))
                                                 .foregroundColor(.white)
                                                 .frame(maxWidth: .infinity)
-                                                .shadow(color: .black, radius: 0, x: 2, y: 3)
+                                                .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                         }
                                     }
 
@@ -213,7 +213,7 @@ struct CalendarView: View {
                                                     Text(dayOfMonth(date: date))
                                                         .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))
                                                         .foregroundColor(.white)
-                                                        .shadow(color: .black, radius: 0, x: 4, y: 3)
+                                                        .shadow(color: .shadowblack, radius: 0, x: 4, y: 3)
                                                 }
                                             }
                                         }

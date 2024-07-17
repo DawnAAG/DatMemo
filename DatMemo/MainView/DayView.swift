@@ -44,7 +44,7 @@ struct DayView: View {
     @State private var showConfirmationAlert = false
     @State private var contentSaved = false
 
-    var onSaveContent: ((Date) -> Void)? 
+    var onSaveContent: ((Date) -> Void)?
 
     var body: some View {
         NavigationStack {
@@ -189,6 +189,7 @@ struct DayView: View {
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
+                                            contentSaved = true
                                         }
                                     }
                                 }
@@ -197,6 +198,7 @@ struct DayView: View {
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
+                                            contentSaved = true
                                         }
                                     }
                                 }
@@ -205,6 +207,7 @@ struct DayView: View {
                                         if text.count <= 200 {
                                             photoManager.saveText(text, for: date)
                                             inputText = text
+                                            contentSaved = true
                                             showTextEditor = false
                                         }
                                     }
@@ -214,8 +217,8 @@ struct DayView: View {
                         }
                         Button(action: {
                             if let _ = photoManager.photos[date], let savedText = photoManager.texts[date], !savedText.isEmpty {
-                                onSaveContent?(date)
                                 contentSaved = true
+                                onSaveContent?(date)
                                 isNavigationActive = true
                             } else {
                                 showIncompleteAlert = true
@@ -227,29 +230,23 @@ struct DayView: View {
                                 .frame(width: isSmallDevice ? 250 : 250, height: isSmallDevice ? 75 : 75)
                         }
                         .navigationDestination(isPresented: $isNavigationActive) {
-                            PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
-                                .environmentObject(photoManager)
-                        }
+                                                   PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
+                                                       .environmentObject(photoManager)
+                                               }
 
-                        .alert(isPresented: $showAlert) {
-                            Alert(title: Text("Content Saved"), message: Text("Your content has been saved successfully."), dismissButton: .default(Text("OK")))
-                        }
                         .alert(isPresented: $showIncompleteAlert) {
-                            Alert(title: Text("Incomplete Content"), message: Text("Please add a photo and text before saving."), dismissButton: .default(Text("OK")))
-                        }
-                        .alert(isPresented: $showConfirmationAlert) {
-                            Alert(title: Text("Unsaved Changes"), message: Text("You have unsaved changes. Are you sure you want to go back?"), primaryButton: .destructive(Text("Yes")) {
-                                self.mode.wrappedValue.dismiss()
-                            }, secondaryButton: .cancel())
+                            Alert(
+                                title: Text("Incomplete Content"),
+                                message: Text("Please ensure both a photo and some text are added."),
+                                dismissButton: .default(Text("OK"))
+                            )
                         }
                     }
-                    .navigationBarHidden(true)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .offset(y:-50)
-                    .onAppear {AudioManager.shared.configureAudioSession()}
-                    .onDisappear {AudioManager.shared.deactivateAudioSession()}
-                    .gesture(
-                        DragGesture().updating($dragOffset) { value, state, transaction in
+                }
+                .offset(y: -50)
+                .gesture(
+                    DragGesture()
+                        .updating($dragOffset) { value, state, _ in
                             state = value.translation
                         }
                         .onEnded { value in
@@ -261,12 +258,30 @@ struct DayView: View {
                                 }
                             }
                         }
+                )
+                .alert(isPresented: $showConfirmationAlert) {
+                    Alert(
+                        title: Text("Unsaved Changes"),
+                        message: Text("You have unsaved changes. Do you want to discard them and leave?"),
+                        primaryButton: .destructive(Text("Discard")) {
+                            self.mode.wrappedValue.dismiss()
+                        },
+                        secondaryButton: .cancel()
                     )
                 }
+            }
+            .navigationBarBackButtonHidden(true)
+        }
+        .onAppear {
+            // Check if there's any saved content
+            if let _ = photoManager.photos[date], let savedText = photoManager.texts[date], !savedText.isEmpty {
+                contentSaved = true
             }
         }
     }
 }
+
+
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
         let date = Date()
@@ -276,6 +291,6 @@ struct DayView_Previews: PreviewProvider {
         let partnerschosencat = partnerschosencat()
         
         return DayView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
-            .environmentObject(PhotoManager()) // Assuming you have a PhotoManager instance to inject
+            .environmentObject(PhotoManager())
     }
 }
