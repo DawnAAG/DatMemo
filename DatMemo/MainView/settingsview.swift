@@ -1,11 +1,5 @@
-//
-//  ProfileSettings.swift
-//  DatMemo
-//
-//  Created by Artiom Gramatin on 29.05.2024.
-//
-
 import SwiftUI
+
 struct CustomBackButton1: View {
     var action: () -> Void
     var body: some View {
@@ -20,8 +14,6 @@ struct CustomBackButton1: View {
         }
     }
 }
-
-import SwiftUI
 
 struct settingsview: View {
     private func imageName(for catChoice: Int8) -> String {
@@ -54,7 +46,7 @@ struct settingsview: View {
                     Form {
                         Section(header: Text("Your Profile")) {
                             TextField("Username", text: $username.username)
-                                .onChange(of: username.username) { newValue in
+                                .onChange(of: username.username) { oldValue, newValue in
                                     SettingsManager.shared.saveUsername(newValue)
                                 }
                             NavigationLink {
@@ -69,7 +61,7 @@ struct settingsview: View {
                         .listRowBackground(Color("Color1"))
                         Section(header: Text("Partner's Profile")) {
                             TextField("Partner's Name", text: $partnersname.partnersname)
-                                .onChange(of: partnersname.partnersname) { newValue in
+                                .onChange(of: partnersname.partnersname) { oldValue, newValue in
                                     SettingsManager.shared.savePartnersname(newValue)
                                 }
                             NavigationLink {
@@ -96,15 +88,16 @@ struct settingsview: View {
         }
         .onAppear {
             // Load saved data
-            username.username = SettingsManager.shared.getUsername() ?? ""
-            partnersname.partnersname = SettingsManager.shared.getPartnersname() ?? ""
+            SettingsManager.shared.loadSettings()
+            username.username = SettingsManager.shared.getUsername()
+            partnersname.partnersname = SettingsManager.shared.getPartnersname()
             yourchoice.ychosenCat = SettingsManager.shared.getYourChoice()
             partnerschosencat.pchosenCat = SettingsManager.shared.getPartnersChoice()
         }
-        .onChange(of: yourchoice.ychosenCat) { newValue in
+        .onChange(of: yourchoice.ychosenCat) { oldValue, newValue in
             SettingsManager.shared.saveYourChoice(newValue)
         }
-        .onChange(of: partnerschosencat.pchosenCat) { newValue in
+        .onChange(of: partnerschosencat.pchosenCat) { oldValue, newValue in
             SettingsManager.shared.savePartnersChoice(newValue)
         }
     }

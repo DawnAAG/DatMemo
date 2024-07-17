@@ -9,27 +9,20 @@ import Combine
 
 class PhotoManager: ObservableObject {
     @Published var photos: [Date: UIImage] = [:]
-    @Published var videos: [Date: URL] = [:]
     @Published var texts: [Date: String] = [:]
 
-    private let photosKey = "photosKey"
-    private let videosKey = "videosKey"
-    private let textsKey = "textsKey"
+    private let photosDirectoryName = "Photos"
+    private let textsDirectoryName = "Texts"
+    private let fileExtension = "json"
 
     init() {
         loadPhotos()
-        loadVideos()
         loadTexts()
     }
 
     func savePhoto(_ photo: UIImage, for date: Date) {
         photos[date] = photo
         savePhotosToDisk()
-    }
-
-    func saveVideo(_ video: URL, for date: Date) {
-        videos[date] = video
-        saveVideosToDisk()
     }
 
     func saveText(_ text: String, for date: Date) {
@@ -41,52 +34,66 @@ class PhotoManager: ObservableObject {
         loadPhotosFromDisk()
     }
 
-    func loadVideos() {
-        loadVideosFromDisk()
-    }
-
     func loadTexts() {
         loadTextsFromDisk()
     }
 
-    private func savePhotosToDisk() {
-        let photoData = photos.mapValues { $0.pngData() }
-        if let data = try? JSONEncoder().encode(photoData) {
-            UserDefaults.standard.set(data, forKey: photosKey)
-        }
+    private func getDocumentsDirectory() -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
 
-    private func saveVideosToDisk() {
-        let videoData = videos.mapValues { $0.absoluteString }
-        if let data = try? JSONEncoder().encode(videoData) {
-            UserDefaults.standard.set(data, forKey: videosKey)
+    private func getPhotosDirectoryURL() -> URL {
+        getDocumentsDirectory().appendingPathComponent(photosDirectoryName, isDirectory: true)
+    }
+
+    private func getTextsDirectoryURL() -> URL {
+        getDocumentsDirectory().appendingPathComponent(textsDirectoryName, isDirectory: true)
+    }
+
+    private func savePhotosToDisk() {
+        let photosURL = getPhotosDirectoryURL().appendingPathComponent("\(photosDirectoryName).\(fileExtension)")
+
+        do {
+            try FileManager.default.createDirectory(at: getPhotosDirectoryURL(), withIntermediateDirectories: true, attributes: nil)
+            let data = try JSONEncoder().encode(photos.mapValues { $0.pngData() })
+            try data.write(to: photosURL)
+        } catch {
+            print("Error saving photos to disk: \(error.localizedDescription)")
         }
     }
 
     private func saveTextsToDisk() {
-        if let data = try? JSONEncoder().encode(texts) {
-            UserDefaults.standard.set(data, forKey: textsKey)
+        let textsURL = getTextsDirectoryURL().appendingPathComponent("\(textsDirectoryName).\(fileExtension)")
+
+        do {
+            try FileManager.default.createDirectory(at: getTextsDirectoryURL(), withIntermediateDirectories: true, attributes: nil)
+            let data = try JSONEncoder().encode(texts)
+            try data.write(to: textsURL)
+        } catch {
+            print("Error saving texts to disk: \(error.localizedDescription)")
         }
     }
 
     private func loadPhotosFromDisk() {
-        if let data = UserDefaults.standard.data(forKey: photosKey),
-           let photoData = try? JSONDecoder().decode([Date: Data].self, from: data) {
-            photos = photoData.compactMapValues { UIImage(data: $0) }
-        }
-    }
+        let photosURL = getPhotosDirectoryURL().appendingPathComponent("\(photosDirectoryName).\(fileExtension)")
 
-    private func loadVideosFromDisk() {
-        if let data = UserDefaults.standard.data(forKey: videosKey),
-           let videoData = try? JSONDecoder().decode([Date: String].self, from: data) {
-            videos = videoData.compactMapValues { URL(string: $0) }
+        do {
+            let data = try Data(contentsOf: photosURL)
+            let decodedPhotos = try JSONDecoder().decode([Date: Data].self, from: data)
+            photos = decodedPhotos.mapValues { UIImage(data: $0)! }
+        } catch {
+            print("Error loading photos from disk: \(error.localizedDescription)")
         }
     }
 
     private func loadTextsFromDisk() {
-        if let data = UserDefaults.standard.data(forKey: textsKey),
-           let loadedTexts = try? JSONDecoder().decode([Date: String].self, from: data) {
-            texts = loadedTexts
+        let textsURL = getTextsDirectoryURL().appendingPathComponent("\(textsDirectoryName).\(fileExtension)")
+
+        do {
+            let data = try Data(contentsOf: textsURL)
+            texts = try JSONDecoder().decode([Date: String].self, from: data)
+        } catch {
+            print("Error loading texts from disk: \(error.localizedDescription)")
         }
     }
 }

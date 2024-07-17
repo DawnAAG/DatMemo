@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct CalendarView: View {
     let backgroundBlur = Image("backgroundblur")
     @GestureState private var dragOffset = CGSize.zero
@@ -10,6 +12,16 @@ struct CalendarView: View {
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
     @ObservedObject var partnerschosencat: partnerschosencat
+    @State private var completedDates: Set<Date> = []
+
+    private func imageName(for date: Date) -> String {
+        if completedDates.contains(date) {
+            return "completeddateicon"
+        } else {
+            return "backgrounddaybuttonimage"
+        }
+    }
+
     private var calendar: Calendar {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_US")
@@ -69,8 +81,24 @@ struct CalendarView: View {
         }
     }
 
+    private func saveCompletedDates() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(Array(completedDates)) {
+            UserDefaults.standard.set(encoded, forKey: "CompletedDates")
+        }
+    }
+
+    private func loadCompletedDates() {
+        if let data = UserDefaults.standard.data(forKey: "CompletedDates") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Date].self, from: data) {
+                completedDates = Set(decoded)
+            }
+        }
+    }
+
     var body: some View {
-        NavigationStack {
+        NavigationView {
             GeometryReader { geometry in
                 let isSmallDevice = geometry.size.height < 667
                 ZStack {
@@ -82,13 +110,11 @@ struct CalendarView: View {
                     VStack {
                         HStack {
                             Spacer()
-                            NavigationLink {
-                                Profile(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
-                            } label: {
+                            NavigationLink(destination: Profile(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)) {
                                 Image(imageName(for: yourchoice.ychosenCat))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                                    .shadow(color: .black, radius: 0, x: 6, y: 5)
                                     .frame(width: geometry.size.width * (isSmallDevice ? 0.15 : 0.18), height: geometry.size.width * (isSmallDevice ? 0.15 : 0.18))
                             }
                             .padding(.trailing, geometry.size.width * 0.05)
@@ -101,7 +127,7 @@ struct CalendarView: View {
                             Image("calendarviewimg")
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.7)
-                                .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                                .shadow(color: .black, radius: 0, x: 6, y: 5)
                                 .offset(y: -geometry.size.height * 0.05)
 
                             VStack {
@@ -113,7 +139,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.05 : 0.06), height: geometry.size.width * (isSmallDevice ? 0.04 : 0.05))
-                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
                                     }
 
                                     Spacer()
@@ -123,7 +149,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.6 : 0.7), height: geometry.size.height * 0.09)
-                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
 
                                         Text(monthName)
                                             .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.04 : 0.05)))
@@ -139,7 +165,7 @@ struct CalendarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width * (isSmallDevice ? 0.05 : 0.06), height: geometry.size.width * (isSmallDevice ? 0.04 : 0.05))
-                                            .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
+                                            .shadow(color: .black, radius: 0, x: 6, y: 5)
                                     }
                                 }
                                 .padding(.horizontal)
@@ -153,7 +179,7 @@ struct CalendarView: View {
                                         .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.05)
                                         .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))
                                         .foregroundColor(.white)
-                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+                                        .shadow(color: .black, radius: 0, x: 2, y: 3)
                                 }
                                 .padding(.vertical, geometry.size.height * 0.01)
 
@@ -164,31 +190,36 @@ struct CalendarView: View {
                                                 .font(Font.custom("PressStart2P", size: geometry.size.width * 0.03))
                                                 .foregroundColor(.white)
                                                 .frame(maxWidth: .infinity)
-                                                .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+                                                .shadow(color: .black, radius: 0, x: 2, y: 3)
                                         }
                                     }
 
                                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: geometry.size.width * 0.015), count: 7), spacing: geometry.size.height * 0.015) {
                                         ForEach(daysInMonth, id: \.self) { date in
-                                            NavigationLink(destination: DayView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)) {
+                                            NavigationLink(destination: DayView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat, onSaveContent: { savedDate in
+                                                completedDates.insert(savedDate)
+                                                saveCompletedDates()
+                                            })
+                                            .navigationBarHidden(true)
+                                            .navigationBarBackButtonHidden(true))
+                                            {
                                                 ZStack {
-                                                    Image("backgrounddaybuttonimage")
+                                                    Image(imageName(for: date))
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
                                                         .frame(width: geometry.size.width * (isSmallDevice ? 0.08 : 0.095), height: geometry.size.width * (isSmallDevice ? 0.08 : 0.095))
-                                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+                                                        .shadow(color: .black, radius: 0, x: 2, y: 3)
 
                                                     Text(dayOfMonth(date: date))
-                                                        .font(Font.custom("PressStart2P", fixedSize: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))
+                                                        .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))
                                                         .foregroundColor(.white)
-                                                        .shadow(color: .shadowblack, radius: 0, x: 4, y: 3)
+                                                        .shadow(color: .black, radius: 0, x: 4, y: 3)
                                                 }
                                             }
                                         }
                                     }
                                 }
                                 .padding(.horizontal, geometry.size.width * 0.05)
-
                             }
                             .padding(.horizontal)
                             .padding(.bottom, geometry.size.width * (isSmallDevice ? 0.3 : 0.4))
@@ -196,6 +227,13 @@ struct CalendarView: View {
 
                         Spacer()
                     }
+                }
+                .onAppear {
+                    AudioManager.shared.configureAudioSession()
+                    loadCompletedDates()
+                }
+                .onDisappear {
+                    AudioManager.shared.deactivateAudioSession()
                 }
                 .frame(width: geometry.size.width)
                 .aspectRatio(contentMode: .fill)
@@ -210,7 +248,8 @@ struct CalendarView: View {
     }
 }
 
-#Preview {
-    CalendarView(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
+struct CalendarView_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarView(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
+    }
 }
-

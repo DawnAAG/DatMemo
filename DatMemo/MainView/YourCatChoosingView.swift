@@ -1,16 +1,26 @@
 import SwiftUI
 
+import SwiftUI
+
 class yourchosencat: ObservableObject {
-    @Published var ychosenCat: Int8 = 0
+    @Published var ychosenCat: Int8 = 0 {
+        didSet {
+            SettingsManager.shared.saveYourChoice(ychosenCat)
+        }
+    }
+
+    init() {
+        self.ychosenCat = SettingsManager.shared.getYourChoice()
+    }
 }
 
-
 struct YourCatChoosingView: View {
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @EnvironmentObject var yourchoice: yourchosencat
+
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
     @GestureState private var dragOffset = CGSize.zero
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @EnvironmentObject var yourchoice: yourchosencat
 
     var body: some View {
         ZStack {
@@ -18,27 +28,10 @@ struct YourCatChoosingView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-            HStack(alignment: .top) {
-                Text("")
-                                .foregroundColor(Color.white)
-                                .navigationBarBackButtonHidden(true)
-                                .navigationBarItems(leading: Button(action : {
-                                    self.mode.wrappedValue.dismiss()
-                                }){
-                                    Image(systemName: "arrow.left")
-                                        .foregroundColor(Color.white)
-                            })
-            }
-                    .edgesIgnoringSafeArea(.top)
-                    .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                    
-                        if(value.startLocation.x < 20 && value.translation.width > 100) {
-                            self.mode.wrappedValue.dismiss()
-                        }
-                        
-                    }))
-            
+
             VStack(alignment: .center) {
+                Spacer()
+
                 Button {
                     print("Your cat is ArtiomkaCat")
                     yourchoice.ychosenCat = 1
@@ -47,10 +40,10 @@ struct YourCatChoosingView: View {
                     Image("artiomkaCatChoosingButton")
                         .resizable()
                         .frame(width: 160, height: 160)
-                        .shadow(color: .shadowblack, radius: 0, x :6, y: 5)
+                        .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                         .padding(.bottom, scaledPadding * 1.5)
                 }
-                
+
                 Button {
                     print("Your cat is SashenkaCat")
                     yourchoice.ychosenCat = 2
@@ -62,19 +55,23 @@ struct YourCatChoosingView: View {
                         .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                         .padding(.bottom, scaledPadding * 1.5)
                 }
-                
+
                 Button {
                     print("Your cat is DimaCat")
                     yourchoice.ychosenCat = 3
-                    self.mode.wrappedValue.dismiss() 
+                    self.mode.wrappedValue.dismiss()
                 } label: {
                     Image("dimaCatChoosingButton")
                         .resizable()
                         .frame(width: 160, height: 160)
                         .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
                 }
+
+                Spacer()
             }
         }
+        .onAppear { AudioManager.shared.configureAudioSession() }
+        .onDisappear { AudioManager.shared.deactivateAudioSession() }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if value.startLocation.x < 20 && value.translation.width > 100 {
                 self.mode.wrappedValue.dismiss()
@@ -83,7 +80,9 @@ struct YourCatChoosingView: View {
     }
 }
 
-#Preview {
-    YourCatChoosingView().environmentObject(yourchosencat())
+// Preview
+struct YourCatChoosingView_Previews: PreviewProvider {
+    static var previews: some View {
+        YourCatChoosingView().environmentObject(yourchosencat())
+    }
 }
-

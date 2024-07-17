@@ -5,7 +5,6 @@
 //  Created by Artiom Gramatin on 08.07.2024.
 //
 import SwiftUI
-import AVKit
 
 struct PreviewSendView: View {
     let date: Date
@@ -41,7 +40,7 @@ struct PreviewSendView: View {
                     .ignoresSafeArea()
                     .scaledToFill()
 
-                VStack(alignment:.center) {
+                VStack(alignment: .center) {
                     HStack(alignment: .center) {
                         HStack {
                             CustomBackButton1 {
@@ -103,23 +102,13 @@ struct PreviewSendView: View {
                                             .frame(maxWidth: isSmallDevice ? 178 : 228, maxHeight: isSmallDevice ? 248 : 288)
                                             .aspectRatio(contentMode: .fit)
                                     }
-                                } else if let selectedVideo = photoManager.videos[date] {
-                                    ZStack {
-                                        Image("textblock")
-                                            .resizable()
-                                            .ignoresSafeArea()
-                                            .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
-                                        VideoPlayer(player: AVPlayer(url: selectedVideo))
-                                            .frame(maxWidth: isSmallDevice ? 178 : 228, maxHeight: isSmallDevice ? 238 : 288)
-                                            .aspectRatio(contentMode: .fit)
-                                    }
                                 } else {
                                     ZStack {
                                         Image("textblock")
                                             .resizable()
                                             .ignoresSafeArea()
                                             .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
-                                        Text("Tap to choose Image or video")
+                                        Text("Tap to choose Image")
                                             .foregroundColor(.white)
                                             .font(Font.custom("PressStart2P", size: isSmallDevice ? 10 : 12))
                                     }
@@ -146,7 +135,7 @@ struct PreviewSendView: View {
                                         Image("textblock")
                                             .resizable()
                                             .ignoresSafeArea()
-                                        Text("Tap to text")
+                                        Text("Tap to add text")
                                             .padding()
                                             .foregroundColor(.white)
                                             .font(Font.custom("PressStart2P", size: 10))
@@ -215,7 +204,10 @@ struct PreviewSendView: View {
     }
 
     private func captureViewAsImage() -> UIImage {
-        let window = UIApplication.shared.windows.first!
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return UIImage()
+        }
         let renderer = UIGraphicsImageRenderer(size: window.bounds.size)
         return renderer.image { _ in
             window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)

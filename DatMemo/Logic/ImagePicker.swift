@@ -10,10 +10,9 @@ import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
-    @Binding var videoURL: URL?
     var sourceType: UIImagePickerController.SourceType
     var mediaTypes: [String]
-    var completion: (UIImage?, URL?) -> Void
+    var completion: (UIImage?) -> Void
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
@@ -25,10 +24,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
                 parent.image = uiImage
-                parent.completion(uiImage, nil)
-            } else if let url = info[.mediaURL] as? URL {
-                parent.videoURL = url
-                parent.completion(nil, url)
+                parent.completion(uiImage)
             }
             
             picker.dismiss(animated: true)
@@ -47,7 +43,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = sourceType
-        picker.mediaTypes = mediaTypes
+        picker.mediaTypes = mediaTypes // Adjust mediaTypes as needed for image selection only
         return picker
     }
     

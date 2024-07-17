@@ -5,7 +5,6 @@
 //  Created by Artiom Gramatin on 28.06.2024.
 //
 import SwiftUI
-import AVKit
 import Foundation
 
 extension Date {
@@ -35,7 +34,6 @@ struct DayView: View {
 
     @State private var isNavigationActive = false
     @State private var selectedPhoto: UIImage?
-    @State private var selectedVideo: URL?
     @State private var inputText: String = ""
     @State private var isImagePickerPresented = false
     @State private var isCameraPickerPresented = false
@@ -45,6 +43,8 @@ struct DayView: View {
     @State private var showIncompleteAlert = false
     @State private var showConfirmationAlert = false
     @State private var contentSaved = false
+
+    var onSaveContent: ((Date) -> Void)? 
 
     var body: some View {
         NavigationStack {
@@ -119,26 +119,13 @@ struct DayView: View {
                                                     showPhotoSourcePicker = true
                                                 }
                                         }
-                                    } else if let selectedVideo = photoManager.videos[date] {
-                                        ZStack {
-                                            Image("textblock")
-                                                .resizable()
-                                                .ignoresSafeArea()
-                                                .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
-                                            VideoPlayer(player: AVPlayer(url: selectedVideo))
-                                                .frame(maxWidth: isSmallDevice ? 228 : 228, maxHeight: isSmallDevice ? 288 : 288)
-                                                .aspectRatio(contentMode: .fit)
-                                                .onTapGesture {
-                                                    showPhotoSourcePicker = true
-                                                }
-                                        }
                                     } else {
                                         ZStack {
                                             Image("textblock")
                                                 .resizable()
                                                 .ignoresSafeArea()
                                                 .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
-                                            Button("Tap to choose Image or video") {
+                                            Button("Tap to choose Image") {
                                                 showPhotoSourcePicker = true
                                             }
                                             .foregroundColor(.white)
@@ -187,7 +174,7 @@ struct DayView: View {
                                     }
                                 }
                                 .actionSheet(isPresented: $showPhotoSourcePicker) {
-                                    ActionSheet(title: Text("Select Photo or Video Source"), message: nil, buttons: [
+                                    ActionSheet(title: Text("Select Photo Source"), message: nil, buttons: [
                                         .default(Text("Camera")) {
                                             isCameraPickerPresented = true
                                         },
@@ -198,24 +185,18 @@ struct DayView: View {
                                     ])
                                 }
                                 .sheet(isPresented: $isImagePickerPresented) {
-                                    ImagePicker(image: $selectedPhoto, videoURL: $selectedVideo, sourceType: .photoLibrary, mediaTypes: ["public.image", "public.movie"]) { photo, video in
+                                    ImagePicker(image: $selectedPhoto, sourceType: .photoLibrary, mediaTypes: ["public.image"]) { photo in
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
-                                        } else if let video = video {
-                                            photoManager.saveVideo(video, for: date)
-                                            selectedVideo = video
                                         }
                                     }
                                 }
                                 .sheet(isPresented: $isCameraPickerPresented) {
-                                    ImagePicker(image: $selectedPhoto, videoURL: $selectedVideo, sourceType: .camera, mediaTypes: ["public.image", "public.movie"]) { photo, video in
+                                    ImagePicker(image: $selectedPhoto, sourceType: .camera, mediaTypes: ["public.image"]) { photo in
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
-                                        } else if let video = video {
-                                            photoManager.saveVideo(video, for: date)
-                                            selectedVideo = video
                                         }
                                     }
                                 }
@@ -231,87 +212,70 @@ struct DayView: View {
                             }
                             .frame(width: isSmallDevice ? 300 : 320, height: isSmallDevice ? 608 : 608)
                         }
-                        NavigationLink(value: isNavigationActive) {
-                            EmptyView()
-                        }
-                        .navigationDestination(isPresented: $isNavigationActive) {
-                            PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
-                                .environmentObject(photoManager)
-                        }
                         Button(action: {
-                            if (photoManager.photos[date] != nil || photoManager.videos[date] != nil), let savedText = photoManager.texts[date], !savedText.isEmpty {
+                            if let _ = photoManager.photos[date], let savedText = photoManager.texts[date], !savedText.isEmpty {
+                                onSaveContent?(date)
                                 contentSaved = true
-                                showAlert = true
                                 isNavigationActive = true
                             } else {
                                 showIncompleteAlert = true
                             }
                         }) {
-                            Image("SetButtontemplate")
+                            Image("sendbutton")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 250, height: 75)
-                                .overlay(
-                                    Text("Set")
-                                        .foregroundColor(.white)
-                                        .font(Font.custom("PressStart2P", size: 20))
-                                )
+                                .frame(width: isSmallDevice ? 250 : 250, height: isSmallDevice ? 75 : 75)
                         }
-                        .foregroundColor(.white)
-                        .padding(.bottom, isSmallDevice ? 19 : 80)
-                        .padding(.top, isSmallDevice ? 19 : 10)
-                    }
-                    .frame(width: geometry.size.width)
-                    .aspectRatio(contentMode: .fill)
-                    .navigationBarHidden(true)
-                    .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                        if value.startLocation.x < 20 && value.translation.width > 100 {
-                            if contentSaved {
+                        .navigationDestination(isPresented: $isNavigationActive) {
+                            PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
+                                .environmentObject(photoManager)
+                        }
+
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("Content Saved"), message: Text("Your content has been saved successfully."), dismissButton: .default(Text("OK")))
+                        }
+                        .alert(isPresented: $showIncompleteAlert) {
+                            Alert(title: Text("Incomplete Content"), message: Text("Please add a photo and text before saving."), dismissButton: .default(Text("OK")))
+                        }
+                        .alert(isPresented: $showConfirmationAlert) {
+                            Alert(title: Text("Unsaved Changes"), message: Text("You have unsaved changes. Are you sure you want to go back?"), primaryButton: .destructive(Text("Yes")) {
                                 self.mode.wrappedValue.dismiss()
-                            } else {
-                                showConfirmationAlert = true
+                            }, secondaryButton: .cancel())
+                        }
+                    }
+                    .navigationBarHidden(true)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .offset(y:-50)
+                    .onAppear {AudioManager.shared.configureAudioSession()}
+                    .onDisappear {AudioManager.shared.deactivateAudioSession()}
+                    .gesture(
+                        DragGesture().updating($dragOffset) { value, state, transaction in
+                            state = value.translation
+                        }
+                        .onEnded { value in
+                            if value.translation.width > 100 {
+                                if contentSaved {
+                                    self.mode.wrappedValue.dismiss()
+                                } else {
+                                    showConfirmationAlert = true
+                                }
                             }
                         }
-                    }))
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Content Saved"), message: Text("Your content has been saved successfully!"), dismissButton: .default(Text("OK")))
-                    }
-                    .alert(isPresented: $showIncompleteAlert) {
-                        Alert(title: Text("Incomplete Content"), message: Text("Please fill in all the content before saving."), dismissButton: .default(Text("OK")))
-                    }
-                    .alert(isPresented: $showConfirmationAlert) {
-                        Alert(
-                            title: Text("Are you sure?"),
-                            message: Text("Do you want to leave without saving?"),
-                            primaryButton: .destructive(Text("Leave")) {
-                                self.mode.wrappedValue.dismiss()
-                            },
-                            secondaryButton: .cancel(Text("Stay"))
-                        )
-                    }
-                    .onAppear {
-                        if (photoManager.photos[date] != nil || photoManager.videos[date] != nil), let savedText = photoManager.texts[date], !savedText.isEmpty {
-                            contentSaved = true
-                        } else {
-                            contentSaved = false
-                        }
-                    }
+                    )
                 }
             }
         }
     }
-
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        return formatter
+}
+struct DayView_Previews: PreviewProvider {
+    static var previews: some View {
+        let date = Date()
+        let yourchoice = yourchosencat()
+        let username = Username()
+        let partnersname = Partnersname()
+        let partnerschosencat = partnerschosencat()
+        
+        return DayView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
+            .environmentObject(PhotoManager()) // Assuming you have a PhotoManager instance to inject
     }
 }
-
-#Preview{
-    DayView(date: Date(), yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
-        .environmentObject(PhotoManager())
-}
-
-
-//Do the fucking aspectratio for small devices, do not make it look shitty, also add the + button into the calendarview and mainView
