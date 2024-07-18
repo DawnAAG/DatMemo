@@ -216,6 +216,7 @@
 				09D293922C46A4280066E5BD /* audiomanager.swift */,
 				09D2938B2C46A38C0066E5BD /* jsons */,
 				09EF93872C2FE30800A18BE7 /* TextEditorView.swift */,
+				099D2F7A2C49451300843A34 /* notifications.swift */,
 				0949AFDD2C29B6C2004B3850 /* Models */,
 				0949130C2BD988DD00D6D9CE /* DatMemoApp.swift */,
 				09D2938E2C46A3A60066E5BD /* File.swift */,
@@ -254,7 +255,6 @@
 				099D2F742C47ACFC00843A34 /* userSettings.json */,
 				09D2938C2C46A39C0066E5BD /* Dates.json */,
 				099D2F782C47E13500843A34 /* Photos.json */,
-				099D2F7A2C49451300843A34 /* notifications.swift */,
 				099D2F762C47E12000843A34 /* Texts.json */,
 			);
 			path = jsons;

@@ -226,6 +226,7 @@ struct DayView: View {
                             }
                         }) {
                             Image("sendbutton")
+                                .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isSmallDevice ? 250 : 250, height: isSmallDevice ? 75 : 75)
