@@ -28,6 +28,7 @@
 		099D2F752C47ACFC00843A34 /* userSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F742C47ACFC00843A34 /* userSettings.json */; };
 		099D2F772C47E12000843A34 /* Texts.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F762C47E12000843A34 /* Texts.json */; };
 		099D2F792C47E13500843A34 /* Photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F782C47E13500843A34 /* Photos.json */; };
+		099D2F7B2C49451300843A34 /* notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D2F7A2C49451300843A34 /* notifications.swift */; };
 		09A04BC72BFCEC1D00D7F4A7 /* testingdatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A04BC62BFCEC1D00D7F4A7 /* testingdatetime.swift */; };
 		09A04BC92C07BEDE00D7F4A7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A04BC82C07BEDE00D7F4A7 /* Profile.swift */; };
 		09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A04BCA2C08612A00D7F4A7 /* CalendarView.swift */; };
@@ -83,6 +84,7 @@
 		099D2F742C47ACFC00843A34 /* userSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userSettings.json; sourceTree = "<group>"; };
 		099D2F762C47E12000843A34 /* Texts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Texts.json; sourceTree = "<group>"; };
 		099D2F782C47E13500843A34 /* Photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Photos.json; sourceTree = "<group>"; };
+		099D2F7A2C49451300843A34 /* notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notifications.swift; sourceTree = "<group>"; };
 		09A04BC62BFCEC1D00D7F4A7 /* testingdatetime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingdatetime.swift; sourceTree = "<group>"; };
 		09A04BC82C07BEDE00D7F4A7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		09A04BCA2C08612A00D7F4A7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				099D2F742C47ACFC00843A34 /* userSettings.json */,
 				09D2938C2C46A39C0066E5BD /* Dates.json */,
 				099D2F782C47E13500843A34 /* Photos.json */,
+				099D2F7A2C49451300843A34 /* notifications.swift */,
 				099D2F762C47E12000843A34 /* Texts.json */,
 			);
 			path = jsons;
@@ -394,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099D2F7B2C49451300843A34 /* notifications.swift in Sources */,
 				097C33542C3BEF8900A38C17 /* PreiewSendView.swift in Sources */,
 				099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */,
 				094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */,

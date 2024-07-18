@@ -88,7 +88,6 @@ struct settingsview: View {
         }
         .onAppear {
             // Load saved data
-            SettingsManager.shared.loadSettings()
             username.username = SettingsManager.shared.getUsername()
             partnersname.partnersname = SettingsManager.shared.getPartnersname()
             yourchoice.ychosenCat = SettingsManager.shared.getYourChoice()
@@ -102,6 +101,7 @@ struct settingsview: View {
         }
     }
 }
+
 
 #Preview {
     settingsview(username: Username(), partnersname: Partnersname())

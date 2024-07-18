@@ -80,7 +80,7 @@ class PhotoManager: ObservableObject {
         do {
             let data = try Data(contentsOf: photosURL)
             let decodedPhotos = try JSONDecoder().decode([Date: Data].self, from: data)
-            photos = decodedPhotos.mapValues { UIImage(data: $0)! }
+            photos = decodedPhotos.compactMapValues { UIImage(data: $0) }
         } catch {
             print("Error loading photos from disk: \(error.localizedDescription)")
         }

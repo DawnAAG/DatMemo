@@ -220,6 +220,7 @@ struct DayView: View {
                                 contentSaved = true
                                 onSaveContent?(date)
                                 isNavigationActive = true
+                                scheduleNotification()
                             } else {
                                 showIncompleteAlert = true
                             }

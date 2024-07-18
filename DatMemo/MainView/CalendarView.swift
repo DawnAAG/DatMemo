@@ -208,7 +208,7 @@ struct CalendarView: View {
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
                                                         .frame(width: geometry.size.width * (isSmallDevice ? 0.08 : 0.095), height: geometry.size.width * (isSmallDevice ? 0.08 : 0.095))
-                                                        .shadow(color: .black, radius: 0, x: 2, y: 3)
+                                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
 
                                                     Text(dayOfMonth(date: date))
                                                         .font(Font.custom("PressStart2P", size: geometry.size.width * (isSmallDevice ? 0.03 : 0.04)))

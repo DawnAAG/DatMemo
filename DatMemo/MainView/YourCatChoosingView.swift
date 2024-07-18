@@ -1,6 +1,5 @@
 import SwiftUI
 
-import SwiftUI
 
 class yourchosencat: ObservableObject {
     @Published var ychosenCat: Int8 = 0 {
