@@ -55,43 +55,41 @@ struct DayView: View {
                         .resizable()
                         .ignoresSafeArea()
                         .scaledToFill()
-                    VStack {
-                        HStack {
-                            CustomBackButton1 {
-                                if contentSaved {
+                    VStack(alignment: .center) {
+                        HStack(alignment: .center) {
+                            HStack {
+                                CustomBackButton1 {
                                     self.mode.wrappedValue.dismiss()
-                                } else {
-                                    showConfirmationAlert = true
                                 }
                             }
-                            .padding(.trailing, isSmallDevice ? 285 : 304)
+                            .offset(x: isSmallDevice ? 75 : 75)
+                            .frame(width: isSmallDevice ? 42 : 42, height: isSmallDevice ? 42 : 42)
+                            HStack(alignment: .center) {
+                                Text(username.username)
+                                    .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
+                                    .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
+                                    .foregroundColor(Color.brownnr2)
+                                    .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .trailing)
+                                    .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
+
+                                Image("heart")
+                                    .resizable()
+                                    .frame(width: scaledsize * (isSmallDevice ? 0.46 : 0.6), height: scaledsize * (isSmallDevice ? 0.4 : 0.56), alignment: .center)
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+
+                                Text(partnersname.partnersname)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
+                                    .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
+                                    .foregroundColor(Color.brownnr2)
+                                    .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .leading)
+                                    .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
+                            }
+                            
+                            .frame(width: isSmallDevice ? 432 : 432, height: isSmallDevice ? 56 : 56, alignment: .center)
+                            .padding(.trailing, isSmallDevice ? 39 : 29)
+                            .offset(x: isSmallDevice ? -10 : -10)
                         }
-                        .frame(height: 42)
-
-                        HStack(alignment: .center) {
-                            Text(username.username)
-                                .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
-                                .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
-                                .foregroundColor(Color.brownnr2)
-                                .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .trailing)
-                                .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
-
-                            Image("heart")
-                                .resizable()
-                                .frame(width: scaledsize * (isSmallDevice ? 0.46 : 0.6), height: scaledsize * (isSmallDevice ? 0.4 : 0.56), alignment: .center)
-                                .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
-
-                            Text(partnersname.partnersname)
-                                .multilineTextAlignment(.leading)
-                                .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
-                                .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
-                                .foregroundColor(Color.brownnr2)
-                                .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .leading)
-                                .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
-                        }
-                        .frame(width: scaledsize * 2.926, height: scaledsize * 0.56, alignment: .center)
-                        .padding(.bottom, isSmallDevice ? 10 : 10)
-                        .padding(.top, isSmallDevice ? -10 : -45)
                         VStack(alignment: .center) {
                             ZStack {
                                 Image("backfordayview")
@@ -108,12 +106,12 @@ struct DayView: View {
                                             Image("textblock")
                                                 .resizable()
                                                 .ignoresSafeArea()
-                                                .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
+                                                .frame(width: isSmallDevice ? 217 : 237, height: isSmallDevice ? 248 : 298)
                                             Image(uiImage: selectedPhoto)
                                                 .resizable()
                                                 .scaledToFit()
                                                 .ignoresSafeArea()
-                                                .frame(maxWidth: isSmallDevice ? 228 : 228, maxHeight: isSmallDevice ? 288 : 288)
+                                                .frame(maxWidth: isSmallDevice ? 208 : 228, maxHeight: isSmallDevice ? 248 : 288)
                                                 .aspectRatio(contentMode: .fit)
                                                 .onTapGesture {
                                                     showPhotoSourcePicker = true
@@ -124,15 +122,15 @@ struct DayView: View {
                                             Image("textblock")
                                                 .resizable()
                                                 .ignoresSafeArea()
-                                                .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
+                                                .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
                                             Button("Tap to choose Image") {
                                                 showPhotoSourcePicker = true
                                             }
                                             .foregroundColor(.white)
                                             .font(Font.custom("PressStart2P", size: 10))
-                                            .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
+                                            .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
                                         }
-                                        .frame(width: isSmallDevice ? 237 : 237, height: isSmallDevice ? 298 : 298)
+                                        .frame(width: isSmallDevice ? 217 : 237, height: isSmallDevice ? 248 : 298)
                                     }
 
                                     if let text = photoManager.texts[date] {
@@ -141,7 +139,7 @@ struct DayView: View {
                                                 Image("textblock")
                                                     .resizable()
                                                     .ignoresSafeArea()
-                                                    .frame(width: isSmallDevice ? 266 : 266, height: isSmallDevice ? 237 : 237)
+                                                    .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
                                                 VStack {
                                                     Text(text)
                                                         .foregroundStyle(Color.white)
@@ -155,7 +153,7 @@ struct DayView: View {
                                                         }
                                                 }
                                             }
-                                            .frame(width: isSmallDevice ? 266 : 266, height: isSmallDevice ? 237 : 237)
+                                            .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
                                         }
                                     } else {
                                         ZStack {
@@ -170,7 +168,7 @@ struct DayView: View {
                                             .foregroundColor(.white)
                                             .font(Font.custom("PressStart2P", size: 10))
                                         }
-                                        .frame(width: isSmallDevice ? 266 : 266, height: isSmallDevice ? 237 : 237)
+                                        .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
                                     }
                                 }
                                 .actionSheet(isPresented: $showPhotoSourcePicker) {
@@ -213,7 +211,7 @@ struct DayView: View {
                                     }
                                 }
                             }
-                            .frame(width: isSmallDevice ? 300 : 320, height: isSmallDevice ? 608 : 608)
+                            .frame(width: isSmallDevice ? 280 : 320, height: isSmallDevice ? 508 : 608)
                         }
                         Button(action: {
                             if let _ = photoManager.photos[date], let savedText = photoManager.texts[date], !savedText.isEmpty {
@@ -229,7 +227,7 @@ struct DayView: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: isSmallDevice ? 250 : 250, height: isSmallDevice ? 75 : 75)
+                                .frame(width: isSmallDevice ? 230 : 250, height: isSmallDevice ? 55 : 75)
                         }
                         .navigationDestination(isPresented: $isNavigationActive) {
                                                    PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
@@ -245,7 +243,10 @@ struct DayView: View {
                         }
                     }
                 }
-                .offset(y: -50)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .aspectRatio(contentMode: .fill)
+                .navigationBarHidden(true)
+                .offset(y: isSmallDevice ? -175 : -135)
                 .gesture(
                     DragGesture()
                         .updating($dragOffset) { value, state, _ in

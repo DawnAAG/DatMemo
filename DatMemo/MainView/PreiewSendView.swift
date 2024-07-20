@@ -73,7 +73,7 @@ struct PreviewSendView: View {
                         }
                         
                         .frame(width: isSmallDevice ? 432 : 432, height: isSmallDevice ? 56 : 56, alignment: .center)
-                        .padding(.trailing, isSmallDevice ? 39 : 39)
+                        .padding(.trailing, isSmallDevice ? 39 : 29)
                         .offset(x: isSmallDevice ? -10 : -10)
                     }
                     VStack(alignment: .center) {
@@ -169,7 +169,7 @@ struct PreviewSendView: View {
                             Image("setbuttoncircle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: isSmallDevice ? 100 : 100, height: isSmallDevice ? 75 : 75)
+                                .frame(width: isSmallDevice ? 75 : 100, height: isSmallDevice ? 75 : 75)
                         }
                         .opacity(isButtonHidden ? 0 : 1)
                         .sheet(isPresented: $showingShareSheet) {
