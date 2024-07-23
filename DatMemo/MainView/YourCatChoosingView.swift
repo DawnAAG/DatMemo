@@ -1,21 +1,8 @@
 import SwiftUI
 
-
-class yourchosencat: ObservableObject {
-    @Published var ychosenCat: Int8 = 0 {
-        didSet {
-            SettingsManager.shared.saveYourChoice(ychosenCat)
-        }
-    }
-
-    init() {
-        self.ychosenCat = SettingsManager.shared.getYourChoice()
-    }
-}
-
 struct YourCatChoosingView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @EnvironmentObject var yourchoice: yourchosencat
+    @ObservedObject var yourchoice: yourchosencat
 
     let background = Image("Background")
     @ScaledMetric(relativeTo: .body) var scaledPadding: CGFloat = 20
@@ -29,8 +16,15 @@ struct YourCatChoosingView: View {
                 .scaledToFill()
 
             VStack(alignment: .center) {
+                
                 Spacer()
-
+                
+                CustomBackButton1 {
+                                   self.mode.wrappedValue.dismiss()
+                               }
+                               .padding(.trailing, 320)
+                Spacer()
+                
                 Button {
                     print("Your cat is ArtiomkaCat")
                     yourchoice.ychosenCat = 1
@@ -67,8 +61,10 @@ struct YourCatChoosingView: View {
                 }
 
                 Spacer()
+                Spacer()
             }
         }
+        .navigationBarHidden(true)
         .onAppear { AudioManager.shared.configureAudioSession() }
         .onDisappear { AudioManager.shared.deactivateAudioSession() }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
@@ -78,10 +74,6 @@ struct YourCatChoosingView: View {
         }))
     }
 }
-
-// Preview
-struct YourCatChoosingView_Previews: PreviewProvider {
-    static var previews: some View {
-        YourCatChoosingView().environmentObject(yourchosencat())
-    }
+#Preview{
+    YourCatChoosingView(yourchoice: yourchosencat())
 }

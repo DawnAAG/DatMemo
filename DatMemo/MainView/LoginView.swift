@@ -25,21 +25,23 @@ extension View {
 }
 
 class Username: ObservableObject {
-    @AppStorage("username") var username: String = "" {
+    @Published var username: String = SettingsManager.shared.getUsername() {
         didSet {
             if username.count > 9 {
                 username = String(username.prefix(9))
             }
+            SettingsManager.shared.saveUsername(username)
         }
     }
 }
 
 class Partnersname: ObservableObject {
-    @AppStorage("partnersname") var partnersname: String = "" {
+    @Published var partnersname: String = SettingsManager.shared.getPartnersname() {
         didSet {
             if partnersname.count > 9 {
                 partnersname = String(partnersname.prefix(9))
             }
+            SettingsManager.shared.savePartnersname(partnersname)
         }
     }
 }
@@ -82,15 +84,18 @@ struct LoginView: View {
         }
         .onAppear {
             #if !targetEnvironment(simulator)
-            requestAllPermissions()
+            PermissionsManager.shared.requestAllPermissions { success, deniedPermissions in
+                if success {
+                    print("All permissions granted")
+                } else {
+                    print("Some permissions were denied: \(deniedPermissions)")
+                }
+            }
+
             #endif
             if UserDefaults.standard.bool(forKey: "loggedIn") {
-                if let savedYourChoice = UserDefaults.standard.object(forKey: "yourChoice") as? Int {
-                    yourchoice.ychosenCat = Int8(savedYourChoice)
-                }
-                if let savedPartnersChoice = UserDefaults.standard.object(forKey: "partnersChoice") as? Int {
-                    partnerschoice.pchosenCat = Int8(savedPartnersChoice)
-                }
+                yourchoice.ychosenCat = SettingsManager.shared.getYourChoice()
+                partnerschoice.pchosenCat = SettingsManager.shared.getPartnersChoice()
                 showNextView = true
             }
         }
@@ -117,7 +122,7 @@ struct LoginView: View {
             
             HStack(alignment: .center) {
                 NavigationLink {
-                    YourCatChoosingView().environmentObject(yourchoice)
+                    YourCatChoosingView(yourchoice: yourchoice).environmentObject(yourchoice)
                 } label: {
                     ImageForCatChoice(imageName: imageName(for: yourchoice.ychosenCat))
                 }
@@ -125,7 +130,7 @@ struct LoginView: View {
                 .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                 
                 NavigationLink {
-                    PartnersCatChoosingView().environmentObject(partnerschoice)
+                    PartnersCatChoosingView(partnerschoice: partnerschoice).environmentObject(partnerschoice)
                 } label: {
                     ImageForCatChoice(imageName: imageName(for: partnerschoice.pchosenCat))
                 }
@@ -187,10 +192,10 @@ struct LoginView: View {
                     } else {
                         showError = false
                         
-                        UserDefaults.standard.set(usernameObj.username, forKey: "username")
-                        UserDefaults.standard.set(partnersnameObj.partnersname, forKey: "partnersname")
-                        UserDefaults.standard.set(Int(yourchoice.ychosenCat), forKey: "yourChoice")
-                        UserDefaults.standard.set(Int(partnerschoice.pchosenCat), forKey: "partnersChoice")
+                        SettingsManager.shared.saveUsername(usernameObj.username)
+                        SettingsManager.shared.savePartnersname(partnersnameObj.partnersname)
+                        SettingsManager.shared.saveYourChoice(yourchoice.ychosenCat)
+                        SettingsManager.shared.savePartnersChoice(partnerschoice.pchosenCat)
                         
                         UserDefaults.standard.set(true, forKey: "loggedIn")
                         
@@ -213,8 +218,8 @@ struct LoginView: View {
                     .opacity(showError ? 1 : 0)
             }
         }
-        .onAppear {AudioManager.shared.configureAudioSession()}
-        .onDisappear {AudioManager.shared.deactivateAudioSession()}
+        .onAppear { AudioManager.shared.configureAudioSession() }
+        .onDisappear { AudioManager.shared.deactivateAudioSession() }
     }
     
     private func imageName(for catChoice: Int8) -> String {
@@ -225,121 +230,18 @@ struct LoginView: View {
         default: return "ChooseButtonCats"
         }
     }
-
-    func requestAllPermissions() {
-        requestNotificationPermission()
-        requestCameraPermission()
-        requestPhotosPermission()
-        requestContactsPermission()
-        requestStoragePermission()
-    }
-
-    func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
-                print("Notification permission granted.")
-            } else if let error = error {
-                print("Notification permission denied: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    func requestCameraPermission() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            print("Camera access granted.")
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    print("Camera access granted.")
-                } else {
-                    print("Camera access denied.")
-                }
-            }
-        case .denied, .restricted:
-            print("Camera access denied.")
-        @unknown default:
-            print("Unknown camera access status.")
-        }
-    }
-
-    func requestPhotosPermission() {
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized:
-                print("Photos access granted.")
-            case .denied, .restricted:
-                print("Photos access denied.")
-            case .notDetermined:
-                PHPhotoLibrary.requestAuthorization { status in
-                    if status == .authorized {
-                        print("Photos access granted.")
-                    } else {
-                        print("Photos access denied.")
-                    }
-                }
-            case .limited:
-                print("Photos access is limited.")
-            @unknown default:
-                print("Unknown photos access status.")
-            }
-        }
-    }
-
-    func requestContactsPermission() {
-        let store = CNContactStore()
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .authorized:
-            print("Contacts access granted.")
-        case .notDetermined:
-            store.requestAccess(for: .contacts) { granted, error in
-                if granted {
-                    print("Contacts access granted.")
-                } else if let error = error {
-                    print("Contacts access denied: \(error.localizedDescription)")
-                }
-            }
-        case .denied, .restricted:
-            print("Contacts access denied.")
-        @unknown default:
-            print("Unknown contacts access status.")
-        }
-    }
-
-    func requestStoragePermission() {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized:
-            print("Storage access granted.")
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { status in
-                if status == .authorized {
-                    print("Storage access granted.")
-                } else {
-                    print("Storage access denied.")
-                }
-            }
-        case .denied, .restricted:
-            print("Storage access denied.")
-        case .limited:
-            print("Storage access is limited.")
-        @unknown default:
-            print("Unknown storage access status.")
-        }
-    }
 }
 
 struct ImageForCatChoice: View {
     let imageName: String
-    
+
     var body: some View {
         Image(imageName)
             .resizable()
+            .scaledToFit()
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
+#Preview{
+    LoginView()
 }

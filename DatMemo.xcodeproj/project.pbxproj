@@ -21,11 +21,13 @@
 		094EC4B42C18655100D34CDB /* YourCatChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094EC4B32C18655100D34CDB /* YourCatChoosingView.swift */; };
 		09542EF42C2C602D00E21096 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09542EF32C2C602D00E21096 /* Colors.swift */; };
 		097C33542C3BEF8900A38C17 /* PreiewSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C33532C3BEF8900A38C17 /* PreiewSendView.swift */; };
+		0986099D2C4EC04100FAA5D4 /* Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986099C2C4EC04100FAA5D4 /* Classes.swift */; };
+		0986099F2C4EC25F00FAA5D4 /* userSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 0986099E2C4EC25F00FAA5D4 /* userSettings.json */; };
+		098609A22C4FDE6000FAA5D4 /* permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098609A12C4FDE6000FAA5D4 /* permissions.swift */; };
 		099848442C2EF99F00112D8F /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848432C2EF99F00112D8F /* DayView.swift */; };
 		099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848452C2EFB2100112D8F /* ImagePicker.swift */; };
 		099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848472C2EFB4600112D8F /* PhotoManager.swift */; };
 		099D2F732C47A1B900843A34 /* settingsmanage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D2F722C47A1B900843A34 /* settingsmanage.swift */; };
-		099D2F752C47ACFC00843A34 /* userSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F742C47ACFC00843A34 /* userSettings.json */; };
 		099D2F772C47E12000843A34 /* Texts.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F762C47E12000843A34 /* Texts.json */; };
 		099D2F792C47E13500843A34 /* Photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 099D2F782C47E13500843A34 /* Photos.json */; };
 		099D2F7B2C49451300843A34 /* notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D2F7A2C49451300843A34 /* notifications.swift */; };
@@ -77,11 +79,13 @@
 		09542EF32C2C602D00E21096 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		096EEE362C3D782D00EAA63B /* DatMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatMemo.entitlements; sourceTree = "<group>"; };
 		097C33532C3BEF8900A38C17 /* PreiewSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreiewSendView.swift; sourceTree = "<group>"; };
+		0986099C2C4EC04100FAA5D4 /* Classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classes.swift; sourceTree = "<group>"; };
+		0986099E2C4EC25F00FAA5D4 /* userSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userSettings.json; sourceTree = "<group>"; };
+		098609A12C4FDE6000FAA5D4 /* permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = permissions.swift; sourceTree = "<group>"; };
 		099848432C2EF99F00112D8F /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		099848452C2EFB2100112D8F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		099848472C2EFB4600112D8F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		099D2F722C47A1B900843A34 /* settingsmanage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsmanage.swift; sourceTree = "<group>"; };
-		099D2F742C47ACFC00843A34 /* userSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userSettings.json; sourceTree = "<group>"; };
 		099D2F762C47E12000843A34 /* Texts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Texts.json; sourceTree = "<group>"; };
 		099D2F782C47E13500843A34 /* Photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Photos.json; sourceTree = "<group>"; };
 		099D2F7A2C49451300843A34 /* notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notifications.swift; sourceTree = "<group>"; };
@@ -211,7 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				099848472C2EFB4600112D8F /* PhotoManager.swift */,
+				0986099C2C4EC04100FAA5D4 /* Classes.swift */,
 				099848452C2EFB2100112D8F /* ImagePicker.swift */,
+				098609A12C4FDE6000FAA5D4 /* permissions.swift */,
 				099D2F722C47A1B900843A34 /* settingsmanage.swift */,
 				09D293922C46A4280066E5BD /* audiomanager.swift */,
 				09D2938B2C46A38C0066E5BD /* jsons */,
@@ -252,10 +258,10 @@
 		09D2938B2C46A38C0066E5BD /* jsons */ = {
 			isa = PBXGroup;
 			children = (
-				099D2F742C47ACFC00843A34 /* userSettings.json */,
 				09D2938C2C46A39C0066E5BD /* Dates.json */,
 				099D2F782C47E13500843A34 /* Photos.json */,
 				099D2F762C47E12000843A34 /* Texts.json */,
+				0986099E2C4EC25F00FAA5D4 /* userSettings.json */,
 			);
 			path = jsons;
 			sourceTree = "<group>";
@@ -348,6 +354,9 @@
 				Base,
 			);
 			mainGroup = 094913002BD988DD00D6D9CE;
+			packageReferences = (
+				098609A02C4EC51500FAA5D4 /* XCRemoteSwiftPackageReference "swift-nio" */,
+			);
 			productRefGroup = 0949130A2BD988DD00D6D9CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,8 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				099D2F792C47E13500843A34 /* Photos.json in Resources */,
+				0986099F2C4EC25F00FAA5D4 /* userSettings.json in Resources */,
 				094913472BDB96FA00D6D9CE /* PressStart2P.ttf in Resources */,
-				099D2F752C47ACFC00843A34 /* userSettings.json in Resources */,
 				094913162BD988E000D6D9CE /* Preview Assets.xcassets in Resources */,
 				099D2F772C47E12000843A34 /* Texts.json in Resources */,
 				09D2938D2C46A39C0066E5BD /* Dates.json in Resources */,
@@ -405,6 +414,8 @@
 				09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */,
 				099848442C2EF99F00112D8F /* DayView.swift in Sources */,
 				09542EF42C2C602D00E21096 /* Colors.swift in Sources */,
+				098609A22C4FDE6000FAA5D4 /* permissions.swift in Sources */,
+				0986099D2C4EC04100FAA5D4 /* Classes.swift in Sources */,
 				09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */,
 				099D2F732C47A1B900843A34 /* settingsmanage.swift in Sources */,
 				094913442BDB8A0A00D6D9CE /* LoginView.swift in Sources */,
@@ -589,12 +600,16 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "We need contacts so you can send the photo to your partner";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for recording audio";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -625,12 +640,16 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to allow you to take and upload photos.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "We need contacts so you can send the photo to your partner";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for recording audio";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to allow you to select and upload photos.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -760,6 +779,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		098609A02C4EC51500FAA5D4 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.68.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 094913012BD988DD00D6D9CE /* Project object */;
 }

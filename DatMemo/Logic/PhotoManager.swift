@@ -1,9 +1,3 @@
-//
-//  PhotoManager.swift
-//  DatMemo
-//
-//  Created by Artiom Gramatin on 28.06.2024.
-//
 import SwiftUI
 import Combine
 
@@ -16,6 +10,8 @@ class PhotoManager: ObservableObject {
     private let fileExtension = "json"
 
     init() {
+        createDirectoriesIfNeeded()
+        createFilesIfNeeded()
         loadPhotos()
         loadTexts()
     }
@@ -50,11 +46,39 @@ class PhotoManager: ObservableObject {
         getDocumentsDirectory().appendingPathComponent(textsDirectoryName, isDirectory: true)
     }
 
+    private func createDirectoriesIfNeeded() {
+        let photosDirectoryURL = getPhotosDirectoryURL()
+        let textsDirectoryURL = getTextsDirectoryURL()
+
+        do {
+            try FileManager.default.createDirectory(at: photosDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: textsDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print("Error creating directories: \(error.localizedDescription)")
+        }
+    }
+
+    private func createFilesIfNeeded() {
+        let photosURL = getPhotosDirectoryURL().appendingPathComponent("\(photosDirectoryName).\(fileExtension)")
+        let textsURL = getTextsDirectoryURL().appendingPathComponent("\(textsDirectoryName).\(fileExtension)")
+
+        if !FileManager.default.fileExists(atPath: photosURL.path) {
+            // Create an empty JSON file for photos
+            let emptyPhotosData = try? JSONEncoder().encode([Date: Data]())
+            FileManager.default.createFile(atPath: photosURL.path, contents: emptyPhotosData, attributes: nil)
+        }
+
+        if !FileManager.default.fileExists(atPath: textsURL.path) {
+            // Create an empty JSON file for texts
+            let emptyTextsData = try? JSONEncoder().encode([Date: String]())
+            FileManager.default.createFile(atPath: textsURL.path, contents: emptyTextsData, attributes: nil)
+        }
+    }
+
     private func savePhotosToDisk() {
         let photosURL = getPhotosDirectoryURL().appendingPathComponent("\(photosDirectoryName).\(fileExtension)")
 
         do {
-            try FileManager.default.createDirectory(at: getPhotosDirectoryURL(), withIntermediateDirectories: true, attributes: nil)
             let data = try JSONEncoder().encode(photos.mapValues { $0.pngData() })
             try data.write(to: photosURL)
         } catch {
@@ -66,7 +90,6 @@ class PhotoManager: ObservableObject {
         let textsURL = getTextsDirectoryURL().appendingPathComponent("\(textsDirectoryName).\(fileExtension)")
 
         do {
-            try FileManager.default.createDirectory(at: getTextsDirectoryURL(), withIntermediateDirectories: true, attributes: nil)
             let data = try JSONEncoder().encode(texts)
             try data.write(to: textsURL)
         } catch {

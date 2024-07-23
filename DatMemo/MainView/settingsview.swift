@@ -27,8 +27,8 @@ struct settingsview: View {
 
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
-    @EnvironmentObject var yourchoice: yourchosencat
-    @EnvironmentObject var partnerschosencat: partnerschosencat
+    @ObservedObject var yourchoice: yourchosencat
+    @ObservedObject var partnerschosencat: partnerschosencat
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -50,13 +50,16 @@ struct settingsview: View {
                                     SettingsManager.shared.saveUsername(newValue)
                                 }
                             NavigationLink {
-                                YourCatChoosingView().environmentObject(yourchoice)
+                                YourCatChoosingView(yourchoice: yourchoice).environmentObject(yourchoice)
                             } label: {
                                 ImageForCatChoice(imageName: imageName(for: yourchoice.ychosenCat))
                             }
                             .frame(width: isSmallDevice ? 150 : 170, height: isSmallDevice ? 140 : 160)
                             .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                             .padding()
+                            .onChange(of: yourchoice.ychosenCat) { oldValue, newValue in
+                                SettingsManager.shared.saveYourChoice(newValue)
+                            }
                         }
                         .listRowBackground(Color("Color1"))
                         Section(header: Text("Partner's Profile")) {
@@ -65,13 +68,16 @@ struct settingsview: View {
                                     SettingsManager.shared.savePartnersname(newValue)
                                 }
                             NavigationLink {
-                                PartnersCatChoosingView().environmentObject(partnerschosencat)
+                                PartnersCatChoosingView(partnerschoice: partnerschosencat).environmentObject(partnerschosencat)
                             } label: {
                                 ImageForCatChoice(imageName: imageName(for: partnerschosencat.pchosenCat))
                             }
                             .frame(width: isSmallDevice ? 150 : 170, height: isSmallDevice ? 140 : 160)
                             .shadow(color: .shadowblack, radius: 0, x: 6, y: 3)
                             .padding()
+                            .onChange(of: partnerschosencat.pchosenCat) { oldValue, newValue in
+                                SettingsManager.shared.savePartnersChoice(newValue)
+                            }
                         }
                         .listRowBackground(Color("Color1"))
                     }
@@ -87,24 +93,14 @@ struct settingsview: View {
             }))
         }
         .onAppear {
-            // Load saved data
             username.username = SettingsManager.shared.getUsername()
             partnersname.partnersname = SettingsManager.shared.getPartnersname()
             yourchoice.ychosenCat = SettingsManager.shared.getYourChoice()
             partnerschosencat.pchosenCat = SettingsManager.shared.getPartnersChoice()
         }
-        .onChange(of: yourchoice.ychosenCat) { oldValue, newValue in
-            SettingsManager.shared.saveYourChoice(newValue)
-        }
-        .onChange(of: partnerschosencat.pchosenCat) { oldValue, newValue in
-            SettingsManager.shared.savePartnersChoice(newValue)
-        }
     }
 }
 
-
 #Preview {
-    settingsview(username: Username(), partnersname: Partnersname())
-        .environmentObject(yourchosencat())
-        .environmentObject(partnerschosencat())
+    settingsview(username: Username(), partnersname: Partnersname(), yourchoice: yourchosencat(), partnerschosencat: partnerschosencat())
 }

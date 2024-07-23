@@ -1,6 +1,7 @@
 import Foundation
-import SwiftUI
 import UIKit
+import SwiftUI
+
 
 class SettingsManager {
     static let shared = SettingsManager()
@@ -12,6 +13,7 @@ class SettingsManager {
     }
 
     private init() {
+        createFileIfNeeded() // Ensure the file is created if it doesn't exist
         loadSettings() // Load settings when the manager is initialized
     }
 
@@ -21,10 +23,24 @@ class SettingsManager {
         var partnersname: String
         var yourChoice: Int8
         var partnersChoice: Int8
-        var images: [String: Data] // Stores images as base64 strings
+        var images: [String: Data] // Stores images as Data objects
     }
 
     private var userSettings = UserSettings(username: "", partnersname: "", yourChoice: 0, partnersChoice: 0, images: [:])
+
+    // Ensure the settings file exists
+    private func createFileIfNeeded() {
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                // Create an empty UserSettings object and write to file
+                let initialSettings = UserSettings(username: "", partnersname: "", yourChoice: 0, partnersChoice: 0, images: [:])
+                let data = try JSONEncoder().encode(initialSettings)
+                FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
+            } catch {
+                print("Failed to create settings file: \(error.localizedDescription)")
+            }
+        }
+    }
 
     // Load settings from file
     func loadSettings() {
@@ -32,7 +48,9 @@ class SettingsManager {
             let data = try Data(contentsOf: fileURL)
             userSettings = try JSONDecoder().decode(UserSettings.self, from: data)
         } catch {
-            print("Failed to load settings: \(error.localizedDescription)")
+            print("Failed to load settings: \(error.localizedDescription). Initializing with default values.")
+            // Re-create the file with default settings if loading fails
+            createFileIfNeeded()
         }
     }
 

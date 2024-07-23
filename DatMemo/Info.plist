@@ -12,14 +12,23 @@
 		<string>fetch</string>
 		<string>processing</string>
 		<string>remote-notification</string>
+		<string>voip</string>
 	</array>
+	<key>aps-environmen</key>
+	<string>development</string>
 	<key>com.apple.developer.mobile.usermanager</key>
+	<true/>
+	<key>com.apple.developer.networking.networkextension</key>
+	<true/>
+	<key>com.apple.developer.networking.wifi-info</key>
 	<true/>
 	<key>com.apple.developer.pushkit.unrestricted-voi</key>
 	<true/>
 	<key>com.apple.developer.runningboard.assertions.frontboard</key>
 	<true/>
 	<key>com.apple.developer.runningboard.process-state</key>
+	<true/>
+	<key>com.apple.developer.usernotifications.core</key>
 	<true/>
 	<key>com.apple.mobile.usermanagerd.xpc</key>
 	<true/>
@@ -30,6 +39,8 @@
 	<key>com.apple.runningboard.process-state</key>
 	<true/>
 	<key>com.apple.runningboard.trustedtarget</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
 	<true/>
 </dict>
 </plist>

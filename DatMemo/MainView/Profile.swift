@@ -44,7 +44,7 @@ struct Profile: View {
                             }
                             .padding(.trailing, isSmallDevice ? -5 : -10)
                             
-                            NavigationLink(destination: settingsview(username: username, partnersname: partnersname)
+                            NavigationLink(destination: settingsview(username: username, partnersname: partnersname, yourchoice: yourchoice, partnerschosencat: partnerschosencat)
                                             .environmentObject(yourchoice)
                                             .environmentObject(partnerschosencat)) {
                                 HStack {
@@ -110,9 +110,7 @@ struct CustomBackButton: View {
     }
 }
 
-struct Profile_Previews: PreviewProvider {
-    static var previews: some View {
-        Profile(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
-    }
+#Preview{
+    Profile(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
 }
 
