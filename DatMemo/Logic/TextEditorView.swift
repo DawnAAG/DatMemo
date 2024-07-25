@@ -10,6 +10,7 @@ import SwiftUI
 struct TextEditorView: View {
     @Binding var text: String
     var onSave: (String) -> Void
+    let maxCharacters = 200
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -22,14 +23,25 @@ struct TextEditorView: View {
                     .frame(height: 200)
                     .font(Font.custom("PressStart2P", size: 12))
                 
+                HStack {
+                    Spacer()
+                    Text("\(text.count)/\(maxCharacters)")
+                        .font(Font.custom("PressStart2P", size: 12))
+                        .foregroundColor(text.count > maxCharacters ? .red : .gray)
+                        .padding(.trailing)
+                }
+                
                 Button("Save") {
-                    onSave(text)
-                    presentationMode.wrappedValue.dismiss()
+                    if text.count <= maxCharacters {
+                        onSave(text)
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }
                 .padding()
-                .background(Color.blue)
+                .background(text.count <= maxCharacters ? Color.blue : Color.gray)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+                .disabled(text.count > maxCharacters)
             }
             .padding()
             .font(Font.custom("PressStart2P", size: 12))
