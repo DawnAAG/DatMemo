@@ -24,6 +24,7 @@
 		0986099D2C4EC04100FAA5D4 /* Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986099C2C4EC04100FAA5D4 /* Classes.swift */; };
 		0986099F2C4EC25F00FAA5D4 /* userSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 0986099E2C4EC25F00FAA5D4 /* userSettings.json */; };
 		098609A22C4FDE6000FAA5D4 /* permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098609A12C4FDE6000FAA5D4 /* permissions.swift */; };
+		098609A52C5A47CB00FAA5D4 /* Heart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098609A42C5A47CB00FAA5D4 /* Heart.swift */; };
 		099848442C2EF99F00112D8F /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848432C2EF99F00112D8F /* DayView.swift */; };
 		099848462C2EFB2100112D8F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848452C2EFB2100112D8F /* ImagePicker.swift */; };
 		099848482C2EFB4600112D8F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099848472C2EFB4600112D8F /* PhotoManager.swift */; };
@@ -82,6 +83,7 @@
 		0986099C2C4EC04100FAA5D4 /* Classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classes.swift; sourceTree = "<group>"; };
 		0986099E2C4EC25F00FAA5D4 /* userSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userSettings.json; sourceTree = "<group>"; };
 		098609A12C4FDE6000FAA5D4 /* permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = permissions.swift; sourceTree = "<group>"; };
+		098609A42C5A47CB00FAA5D4 /* Heart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heart.swift; sourceTree = "<group>"; };
 		099848432C2EF99F00112D8F /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		099848452C2EFB2100112D8F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		099848472C2EFB4600112D8F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		0949133D2BDA564000D6D9CE /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				098609A32C5A47BE00FAA5D4 /* Elements */,
 				094913432BDB8A0A00D6D9CE /* LoginView.swift */,
 				09542EF32C2C602D00E21096 /* Colors.swift */,
 				094EC4B32C18655100D34CDB /* YourCatChoosingView.swift */,
@@ -253,6 +256,14 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		098609A32C5A47BE00FAA5D4 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				098609A42C5A47CB00FAA5D4 /* Heart.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 		09D2938B2C46A38C0066E5BD /* jsons */ = {
@@ -414,6 +425,7 @@
 				09EF93882C2FE30800A18BE7 /* TextEditorView.swift in Sources */,
 				099848442C2EF99F00112D8F /* DayView.swift in Sources */,
 				09542EF42C2C602D00E21096 /* Colors.swift in Sources */,
+				098609A52C5A47CB00FAA5D4 /* Heart.swift in Sources */,
 				098609A22C4FDE6000FAA5D4 /* permissions.swift in Sources */,
 				0986099D2C4EC04100FAA5D4 /* Classes.swift in Sources */,
 				09A04BCB2C08612A00D7F4A7 /* CalendarView.swift in Sources */,
@@ -607,8 +619,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -647,8 +659,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

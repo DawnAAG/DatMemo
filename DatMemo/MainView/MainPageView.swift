@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MainPageView: View {
-    @ScaledMetric(relativeTo: .body) var scaledsize: CGFloat = 100
+    @ScaledMetric(relativeTo: .body) var scaledSize: CGFloat = 100
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -15,17 +15,32 @@ struct MainPageView: View {
     @ObservedObject var username: Username
     @ObservedObject var partnersname: Partnersname
     @ObservedObject var partnerschosencat: partnerschosencat
+    
     let background = Image("Background")
+    
+    // Use @State for preloading CalendarView to optimize performance
+    @State private var preloadedCalendarView: CalendarView
+    
+    init(yourchoice: yourchosencat, username: Username, partnersname: Partnersname, partnerschosencat: partnerschosencat) {
+        self.yourchoice = yourchoice
+        self.username = username
+        self.partnersname = partnersname
+        self.partnerschosencat = partnerschosencat
+        
+        // Initialize the preloaded CalendarView
+        _preloadedCalendarView = State(initialValue: CalendarView(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat))
+    }
     
     var body: some View {
         GeometryReader { geometry in
             let isSmallDevice = geometry.size.height < 667
+            
             NavigationView {
                 ZStack {
                     background
                         .resizable()
-                        .ignoresSafeArea()
                         .scaledToFill()
+                        .ignoresSafeArea()
                     
                     VStack {
                         HStack(alignment: .top) {
@@ -36,40 +51,41 @@ struct MainPageView: View {
                                     Image(imageName(for: yourchoice.ychosenCat))
                                         .resizable()
                                         .shadow(color: .shadowblack, radius: 0, x: 6, y: 5)
-                                        .frame(width: scaledsize * (isSmallDevice ? 0.6 : 0.75), height: scaledsize * (isSmallDevice ? 0.6 : 0.75))
+                                        .frame(width: scaledSize * (isSmallDevice ? 0.6 : 0.75), height: scaledSize * (isSmallDevice ? 0.6 : 0.75))
                                 }
-                                .frame(width: scaledsize * (isSmallDevice ? 0.6 : 0.75), height: scaledsize * (isSmallDevice ? 0.6 : 0.75))
+                                .frame(width: scaledSize * (isSmallDevice ? 0.6 : 0.75), height: scaledSize * (isSmallDevice ? 0.6 : 0.75))
                             }
                         }
-                        .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 2.88 : 2.93))
-                        .padding(.bottom, scaledsize * (isSmallDevice ? 0.2 : 0.28))
+                        .padding(.leading, scaledSize * (isSmallDevice ? 2.88 : 2.93))
+                        .padding(.bottom, scaledSize * (isSmallDevice ? 0.2 : 0.28))
                         
                         HStack(alignment: .center) {
                             Text(username.username)
-                                .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.085 : 0.1))
+                                .padding(.leading, scaledSize * (isSmallDevice ? 0.085 : 0.1))
                                 .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 8 : 8)))
                                 .foregroundColor(Color.brownnr2)
-                                .frame(width: scaledsize * (isSmallDevice ? 1.12 : 1.12), height: scaledsize * (isSmallDevice ? 0.08 : 0.08), alignment: .trailing)
+                                .frame(width: scaledSize * (isSmallDevice ? 1.12 : 1.12), height: scaledSize * (isSmallDevice ? 0.08 : 0.08), alignment: .trailing)
                                 .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
                             
                             Image("heart")
                                 .resizable()
-                                .frame(width: scaledsize * (isSmallDevice ? 0.49 : 0.64), height: scaledsize * (isSmallDevice ? 0.44 : 0.59), alignment: .center)
+                                .frame(width: scaledSize * (isSmallDevice ? 0.49 : 0.64), height: scaledSize * (isSmallDevice ? 0.44 : 0.59), alignment: .center)
                                 .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                             
                             Text(partnersname.partnersname)
                                 .multilineTextAlignment(.leading)
-                                .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.085 : 0.1))
+                                .padding(.leading, scaledSize * (isSmallDevice ? 0.085 : 0.1))
                                 .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 8 : 8)))
                                 .foregroundColor(Color.brownnr2)
-                                .frame(width: scaledsize * (isSmallDevice ? 1.12 : 1.12), height: scaledsize * (isSmallDevice ? 0.08 : 0.08), alignment: .leading)
+                                .frame(width: scaledSize * (isSmallDevice ? 1.12 : 1.12), height: scaledSize * (isSmallDevice ? 0.08 : 0.08), alignment: .leading)
                                 .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
                         }
-                        .frame(width: scaledsize * 3.08, height: scaledsize * 0.59, alignment: .center)
-                        .padding(.top, scaledsize * (isSmallDevice ? 0.1 : 0.44))
+                        .frame(width: scaledSize * 3.08, height: scaledSize * 0.59, alignment: .center)
+                        .padding(.top, scaledSize * (isSmallDevice ? 0.1 : 0.44))
                         
                         NavigationLink {
-                            CalendarView(yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
+                            // Use preloadedCalendarView here
+                            preloadedCalendarView
                                 .navigationBarBackButtonHidden(true)
                         } label: {
                             ZStack {
@@ -92,31 +108,30 @@ struct MainPageView: View {
                                     .offset(y: (isSmallDevice ? 101 : 101))
                                     .shadow(color: .shadowblack, radius: 0, x: 3, y: 4)
                             }
-                            .frame(width: scaledsize * (isSmallDevice ? 3.18 : 3.43), height: scaledsize * (isSmallDevice ? 4.25 : 4.5))
+                            .frame(width: scaledSize * (isSmallDevice ? 3.18 : 3.43), height: scaledSize * (isSmallDevice ? 4.25 : 4.5))
                         }
                         .padding(.top, (isSmallDevice ? 24 : 44))
                     }
                 }
+                .navigationViewStyle(StackNavigationViewStyle()) // Improves performance on iPads
             }
         }
     }
+    
     private func imageName(for chosenCat: Int8) -> String {
-            switch chosenCat {
-            case 1:
-                return "artiomkaCatChoosingButton"
-            case 2:
-                return "sashenkaCatChoosingButton"
-            case 3:
-                return "dimaCatChoosingButton"
-            default:
-                return "ChooseButtonCats"
-            }
+        switch chosenCat {
+        case 1:
+            return "artiomkaCatChoosingButton"
+        case 2:
+            return "sashenkaCatChoosingButton"
+        case 3:
+            return "dimaCatChoosingButton"
+        default:
+            return "ChooseButtonCats"
         }
+    }
 }
-
-
 
 #Preview {
-    MainPageView(yourchoice: yourchosencat(),username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
+    MainPageView(yourchoice: yourchosencat(), username: Username(), partnersname: Partnersname(), partnerschosencat: partnerschosencat())
 }
-

@@ -8,6 +8,7 @@ class PhotoManager: ObservableObject {
     private let photosDirectoryName = "Photos"
     private let textsDirectoryName = "Texts"
     private let fileExtension = "json"
+    private let queue = DispatchQueue(label: "PhotoManagerQueue", qos: .userInitiated)
 
     init() {
         createDirectoriesIfNeeded()
@@ -18,20 +19,28 @@ class PhotoManager: ObservableObject {
 
     func savePhoto(_ photo: UIImage, for date: Date) {
         photos[date] = photo
-        savePhotosToDisk()
+        queue.async { [weak self] in
+            self?.savePhotosToDisk()
+        }
     }
 
     func saveText(_ text: String, for date: Date) {
         texts[date] = text
-        saveTextsToDisk()
+        queue.async { [weak self] in
+            self?.saveTextsToDisk()
+        }
     }
 
     func loadPhotos() {
-        loadPhotosFromDisk()
+        queue.async { [weak self] in
+            self?.loadPhotosFromDisk()
+        }
     }
 
     func loadTexts() {
-        loadTextsFromDisk()
+        queue.async { [weak self] in
+            self?.loadTextsFromDisk()
+        }
     }
 
     private func getDocumentsDirectory() -> URL {
@@ -103,7 +112,9 @@ class PhotoManager: ObservableObject {
         do {
             let data = try Data(contentsOf: photosURL)
             let decodedPhotos = try JSONDecoder().decode([Date: Data].self, from: data)
-            photos = decodedPhotos.compactMapValues { UIImage(data: $0) }
+            DispatchQueue.main.async {
+                self.photos = decodedPhotos.compactMapValues { UIImage(data: $0) }
+            }
         } catch {
             print("Error loading photos from disk: \(error.localizedDescription)")
         }
@@ -114,7 +125,10 @@ class PhotoManager: ObservableObject {
 
         do {
             let data = try Data(contentsOf: textsURL)
-            texts = try JSONDecoder().decode([Date: String].self, from: data)
+            let decodedTexts = try JSONDecoder().decode([Date: String].self, from: data)
+            DispatchQueue.main.async {
+                self.texts = decodedTexts
+            }
         } catch {
             print("Error loading texts from disk: \(error.localizedDescription)")
         }

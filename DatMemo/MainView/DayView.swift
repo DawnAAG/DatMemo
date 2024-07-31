@@ -45,9 +45,11 @@ struct DayView: View {
     @State private var showAlert = false
     @State private var showIncompleteAlert = false
     @State private var showConfirmationAlert = false
-    @State private var contentSaved = false
+    @State private var contentSaved = true
     @State private var missingTextAlert = false
     @State private var missingImageAlert = false
+    @State private var textCompleted = false
+    @State private var imageCompleted = false
 
     var onSaveContent: ((Date) -> Void)?
 
@@ -74,25 +76,7 @@ struct DayView: View {
                             .frame(width: isSmallDevice ? 42 : 42, height: isSmallDevice ? 42 : 42)
 
                             HStack(alignment: .center) {
-                                Text(username.username)
-                                    .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
-                                    .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
-                                    .foregroundColor(Color.brownnr2)
-                                    .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .trailing)
-                                    .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
-
-                                Image("heart")
-                                    .resizable()
-                                    .frame(width: scaledsize * (isSmallDevice ? 0.46 : 0.6), height: scaledsize * (isSmallDevice ? 0.4 : 0.56), alignment: .center)
-                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
-
-                                Text(partnersname.partnersname)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(sides: [.left], value: scaledsize * (isSmallDevice ? 0.08 : 0.095))
-                                    .font(Font.custom("PressStart2P", fixedSize: (isSmallDevice ? 7.6 : 7.6)))
-                                    .foregroundColor(Color.brownnr2)
-                                    .frame(width: scaledsize * (isSmallDevice ? 1.064 : 1.064), height: scaledsize * (isSmallDevice ? 0.076 : 0.076), alignment: .leading)
-                                    .shadow(color: .shadowblack, radius: 0, x: 1, y: 1)
+                                Heart(username: username, partnersname: partnersname)
                             }
                             .frame(width: isSmallDevice ? 432 : 432, height: isSmallDevice ? 56 : 56, alignment: .center)
                             .padding(.trailing, isSmallDevice ? 39 : 29)
@@ -103,6 +87,7 @@ struct DayView: View {
                                 Image("backfordayview")
                                     .resizable()
                                     .ignoresSafeArea()
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 
                                 VStack {
                                     Text(date.formattedWithSuffix())
@@ -127,6 +112,7 @@ struct DayView: View {
                                                     showPhotoSourcePicker = true
                                                 }
                                         }
+                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                     } else {
                                         ZStack {
                                             Image("textblock")
@@ -141,6 +127,7 @@ struct DayView: View {
                                             .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
                                         }
                                         .frame(width: isSmallDevice ? 217 : 237, height: isSmallDevice ? 248 : 298)
+                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                     }
 
                                     if let text = photoManager.texts[date] {
@@ -164,6 +151,7 @@ struct DayView: View {
                                                 }
                                             }
                                             .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
+                                            .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                         }
                                     } else {
                                         ZStack {
@@ -179,6 +167,7 @@ struct DayView: View {
                                             .font(Font.custom("PressStart2P", size: 10))
                                         }
                                         .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
+                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                     }
                                 }
                                 .actionSheet(isPresented: $showPhotoSourcePicker) {
@@ -197,7 +186,8 @@ struct DayView: View {
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
-                                            contentSaved = true
+                                            contentSaved = false
+                                            imageCompleted = true
                                         }
                                     }
                                 }
@@ -206,17 +196,19 @@ struct DayView: View {
                                         if let photo = photo {
                                             photoManager.savePhoto(photo, for: date)
                                             selectedPhoto = photo
-                                            contentSaved = true
+                                            contentSaved = false
+                                            imageCompleted = true
                                         }
                                     }
                                 }
                                 .sheet(isPresented: $showTextEditor) {
                                     TextEditorView(text: $inputText) { text in
-                                        if text.count <= 200 {
+                                        if text.count <= 200 && text.count >= 1 {
                                             photoManager.saveText(text, for: date)
                                             inputText = text
-                                            contentSaved = true
+                                            contentSaved = false
                                             showTextEditor = false
+                                            textCompleted = true
                                         }
                                     }
                                 }
@@ -234,7 +226,7 @@ struct DayView: View {
                                 showIncompleteAlert = true
                             } else if photoManager.photos[date] == nil {
                                 missingImageAlert = true
-                            } else if inputText.isEmpty {
+                            } else if inputText.isEmpty || textCompleted == false {
                                 missingTextAlert = true
                             }
                         }) {
@@ -244,30 +236,10 @@ struct DayView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: isSmallDevice ? 230 : 250, height: isSmallDevice ? 55 : 75)
                         }
+                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                         .navigationDestination(isPresented: $isNavigationActive) {
                             PreviewSendView(date: date, yourchoice: yourchoice, username: username, partnersname: partnersname, partnerschosencat: partnerschosencat)
                                 .environmentObject(photoManager)
-                        }
-                        .alert(isPresented: $showIncompleteAlert) {
-                            Alert(
-                                title: Text("Incomplete Content"),
-                                message: Text("Please ensure both a photo and some text are added."),
-                                dismissButton: .default(Text("OK"))
-                            )
-                        }
-                        .alert(isPresented: $missingImageAlert) {
-                            Alert(
-                                title: Text("Missing Image"),
-                                message: Text("Please add an image before sending."),
-                                dismissButton: .default(Text("OK"))
-                            )
-                        }
-                        .alert(isPresented: $missingTextAlert) {
-                            Alert(
-                                title: Text("Missing Text"),
-                                message: Text("Please add text before sending."),
-                                dismissButton: .default(Text("OK"))
-                            )
                         }
                     }
                 }
@@ -295,9 +267,32 @@ struct DayView: View {
                         title: Text("Unsaved Changes"),
                         message: Text("You have unsaved changes. Do you want to discard them and leave?"),
                         primaryButton: .destructive(Text("Discard")) {
+                            // Discard changes and dismiss view
+                            contentSaved = true
                             self.mode.wrappedValue.dismiss()
                         },
                         secondaryButton: .cancel()
+                    )
+                }
+                .alert(isPresented: $showIncompleteAlert) {
+                    Alert(
+                        title: Text("Incomplete Content"),
+                        message: Text("Please fill in all the content before saving."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                .alert(isPresented: $missingImageAlert) {
+                    Alert(
+                        title: Text("Missing Image"),
+                        message: Text("Please add an image before saving."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                .alert(isPresented: $missingTextAlert) {
+                    Alert(
+                        title: Text("Missing Text"),
+                        message: Text("Please add text before saving."),
+                        dismissButton: .default(Text("OK"))
                     )
                 }
             }
@@ -308,14 +303,19 @@ struct DayView: View {
                 contentSaved = true
             }
         }
-        .onChange(of: selectedPhoto) {
-            contentSaved = false
+        .onChange(of: selectedPhoto) { oldPhoto, newPhoto in
+            if oldPhoto != newPhoto {
+                contentSaved = false
+            }
         }
-        .onChange(of: inputText) {
-            contentSaved = false
+        .onChange(of: inputText) { oldText, newText in
+            if oldText != newText {
+                contentSaved = false
+            }
         }
     }
 }
+
 
 // Preview provider for DayView
 struct DayView_Previews: PreviewProvider {

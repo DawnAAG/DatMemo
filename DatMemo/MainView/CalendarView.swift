@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 struct CalendarView: View {
     let backgroundBlur = Image("backgroundblur")
     @GestureState private var dragOffset = CGSize.zero

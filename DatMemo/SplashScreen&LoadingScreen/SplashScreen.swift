@@ -41,7 +41,7 @@ struct SplashScreen: View {
     }
     
     private func checkUserLoginStatus() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let username = UserDefaults.standard.string(forKey: "username")
             let partnersname = UserDefaults.standard.string(forKey: "partnersname")
             let ychosenCat = UserDefaults.standard.value(forKey: "ychosenCat") as? Int

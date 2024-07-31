@@ -6,6 +6,8 @@
 //
 import SwiftUI
 
+import SwiftUI
+
 struct PreviewSendView: View {
     let date: Date
     @EnvironmentObject var photoManager: PhotoManager
@@ -39,6 +41,8 @@ struct PreviewSendView: View {
                     .resizable()
                     .ignoresSafeArea()
                     .scaledToFill()
+//                Color(.color2)
+//                    .ignoresSafeArea()
 
                 VStack(alignment: .center) {
                     HStack(alignment: .center) {
@@ -81,6 +85,7 @@ struct PreviewSendView: View {
                             Image("backfordayview")
                                 .resizable()
                                 .ignoresSafeArea()
+                                .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
 
                             VStack {
                                 Text(date.formattedWithSuffix())
@@ -88,6 +93,7 @@ struct PreviewSendView: View {
                                     .foregroundColor(.white)
                                     .padding(.bottom, isSmallDevice ? 2 : 3)
                                     .padding(.top, isSmallDevice ? -10 : -10)
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
 
                                 if let selectedPhoto = photoManager.photos[date] {
                                     ZStack {
@@ -102,6 +108,7 @@ struct PreviewSendView: View {
                                             .frame(maxWidth: isSmallDevice ? 178 : 228, maxHeight: isSmallDevice ? 248 : 288)
                                             .aspectRatio(contentMode: .fit)
                                     }
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 } else {
                                     ZStack {
                                         Image("textblock")
@@ -111,8 +118,10 @@ struct PreviewSendView: View {
                                         Text("Tap to choose Image")
                                             .foregroundColor(.white)
                                             .font(Font.custom("PressStart2P", size: isSmallDevice ? 10 : 12))
+                                            .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                     }
                                     .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 }
 
                                 if let text = photoManager.texts[date] {
@@ -130,6 +139,7 @@ struct PreviewSendView: View {
                                         }
                                     }
                                     .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 } else {
                                     ZStack {
                                         Image("textblock")
@@ -141,6 +151,7 @@ struct PreviewSendView: View {
                                             .font(Font.custom("PressStart2P", size: 10))
                                     }
                                     .frame(width: isSmallDevice ? 246 : 266, height: isSmallDevice ? 187 : 237)
+                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                 }
                             }
                         }
@@ -154,6 +165,8 @@ struct PreviewSendView: View {
                         Image(imageName(for: yourchoice.ychosenCat))
                             .resizable()
                             .frame(width: isSmallDevice ? 75 : 75, height: isSmallDevice ? 75 : 75)
+                            .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+                        
                         Button(action: {
                             isButtonHidden = true
                             isBackButtonHidden = true
@@ -180,6 +193,7 @@ struct PreviewSendView: View {
                         Image(imageName(for: partnerschosencat.pchosenCat))
                             .resizable()
                             .frame(width: isSmallDevice ? 75 : 75, height: isSmallDevice ? 75 : 75)
+                            .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                     }
                     .padding(.top, isSmallDevice ? 5 : 10)
                 }
@@ -194,7 +208,6 @@ struct PreviewSendView: View {
                 .offset(y: isSmallDevice ? -100 : -40)
             }
         }
-
         .navigationBarHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if value.startLocation.x < 20 && value.translation.width > 100 {
@@ -204,28 +217,30 @@ struct PreviewSendView: View {
     }
 
     private func captureViewAsImage() -> UIImage {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+              let rootView = windowScene.windows.first?.rootViewController?.view else {
             return UIImage()
         }
-        let renderer = UIGraphicsImageRenderer(size: window.bounds.size)
-        return renderer.image { _ in
-            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
+        
+        let renderer = UIGraphicsImageRenderer(bounds: rootView.bounds)
+        return renderer.image { ctx in
+            rootView.drawHierarchy(in: ctx.format.bounds, afterScreenUpdates: true)
         }
     }
+
 }
 
 struct ShareSheet: UIViewControllerRepresentable {
     let activityItems: [Any]
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        return controller
+        UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+
 
 struct PreviewSendView_Previews: PreviewProvider {
     static var previews: some View {
