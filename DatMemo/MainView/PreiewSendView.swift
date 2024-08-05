@@ -101,6 +101,7 @@ struct PreviewSendView: View {
                                             .resizable()
                                             .ignoresSafeArea()
                                             .frame(width: isSmallDevice ? 187 : 237, height: isSmallDevice ? 248 : 298)
+                                            .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                         Image(uiImage: selectedPhoto)
                                             .resizable()
                                             .scaledToFit()
@@ -108,7 +109,7 @@ struct PreviewSendView: View {
                                             .frame(maxWidth: isSmallDevice ? 178 : 228, maxHeight: isSmallDevice ? 248 : 288)
                                             .aspectRatio(contentMode: .fit)
                                     }
-                                    .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
+                                    
                                 } else {
                                     ZStack {
                                         Image("textblock")

@@ -6,7 +6,6 @@
 import SwiftUI
 import Foundation
 
-// Extension to format Date with ordinal suffix
 extension Date {
     func formattedWithSuffix() -> String {
         let day = Calendar.current.component(.day, from: self)
@@ -20,7 +19,6 @@ extension Date {
     }
 }
 
-// Main view structure for a specific day
 struct DayView: View {
     let date: Date
     let backgroundBlur = Image("backgroundblur")
@@ -102,6 +100,7 @@ struct DayView: View {
                                                 .resizable()
                                                 .ignoresSafeArea()
                                                 .frame(width: isSmallDevice ? 217 : 237, height: isSmallDevice ? 248 : 298)
+                                                .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                             Image(uiImage: selectedPhoto)
                                                 .resizable()
                                                 .scaledToFit()
@@ -112,7 +111,6 @@ struct DayView: View {
                                                     showPhotoSourcePicker = true
                                                 }
                                         }
-                                        .shadow(color: .shadowblack, radius: 0, x: 2, y: 3)
                                     } else {
                                         ZStack {
                                             Image("textblock")
@@ -216,7 +214,6 @@ struct DayView: View {
                             .frame(width: isSmallDevice ? 280 : 320, height: isSmallDevice ? 508 : 608)
                         }
                         Button(action: {
-                            // Check if both photo and text are available
                             if let _ = photoManager.photos[date], let savedText = photoManager.texts[date], !savedText.isEmpty {
                                 contentSaved = true
                                 onSaveContent?(date)
@@ -316,8 +313,6 @@ struct DayView: View {
     }
 }
 
-
-// Preview provider for DayView
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
         let date = Date()
